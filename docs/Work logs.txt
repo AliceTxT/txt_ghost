@@ -1,0 +1,55 @@
+LOGS
+
+Day 1 (07.10.2020)
+-> Drew Ghostie main pose 
+-> Ghostie expressions
+   -> smile
+   -> . mouth
+   -> o mouth
+   -> pout
+-> Drew Cactie main base
+-> Ghostie blinking animation
+-> Sketched balloons
+
+Day 2 (08.10.2020)
+-> Drew Balloons
+-> Fixed up balloons
+-> Drew Cactie particles/effects
+   -> water
+   -> shiny 
+   -> love hearts
+-> Drew Cactie animations
+   -> ... animation
+-> Cactie menu options
+
+Day 3 (09.10.2020)
+-> struggled with the communicate boxes
+-> worked on firstboot dialogue
+-> added the animation to the rest of the the different expressions
+-> plan to write out plan before doing it in the files
+    -> bootup dialogue
+    -> then see what expressions I need before I draw them
+-> gh_bootend file corrupted
+    -> need to start again
+-> expressions needed
+    -> sad
+    -> surprised
+    -> panicking
+    -> flustered
+    -> looking down at the ground
+    -> general confusion
+    -> absolutely dumbfounded
+    -> upset and confused (furrow brow)
+    -> >~< face
+    -> owo face
+    -> sweatdrop
+    -> awkward
+    -> closed eyed smile
+		-> with flower particles (innocent looking)
+-> worked on gh_nameteach.dic
+	-> there was an annoying error with the Select.title code
+	-> but i managed to fix it
+-> gotta work on dialogue tomorrow...
+-> sleepy =^= (it's 1:10am...)
+	-> gonna go sleep- bye bye...
+   
