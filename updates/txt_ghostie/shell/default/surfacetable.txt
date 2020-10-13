@@ -1,0 +1,25 @@
+charset,UTF-8
+version,1
+option,DisableNoDefineSurfaces
+
+group,A
+{
+scope,0
+
+0,Normal
+10,Cactie
+11,Smile
+12,Dot mouth
+13,O mouth
+14,Pout
+}
+
+groupB
+(
+scope,0
+
+90,water
+91,shiny
+92,love hearts
+93,...
+}

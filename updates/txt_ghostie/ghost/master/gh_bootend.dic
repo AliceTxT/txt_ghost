@@ -1,0 +1,729 @@
+﻿//---Booting and Ending---
+
+//--On first boot
+OnFirstBoot
+{
+ 	lastTalk = "" //This is part of how chained conversations work (see aitalk.dic).
+	passmin = 0 
+	passsec = 0 // These two keep track of the time.
+ 	username         = "USER" //This sets a temporary name for the user. It'll be replaced when they tell the ghost their name.
+	stroke           = 0	  // Sets their being-pet state to zero.
+ 	teachusername    = 0	  // Related to them learning your name.
+	mikireflag       = 0	  // Determines behavior at certain points.
+ 	aitalkinterval = 400      //Their default talk rate.
+	presuffix = "unknown"     //Their pronouns
+ 	birthdayprint = "????"    //A temporary value for the user's birthday.
+	talktime = "5 minutes"    //How the value aitalkinterval will display in the config menu.
+	deleteshitai = "OFF"      //Sets whether or not the user can uninstall the ghost to "OFF".
+	nowshell = "default"      //This is for a special if check in aitalk.dic to see what shell the ghost is using. You should use the name of your default shell folder here.
+	
+	if reference0 == 0 
+ 	{
+		"\![enter,passivemode]/
+		\0\s[0]\b[4]  Oh! \w1I've never been here before.../
+		\x\c\s[0]\b[2]  \w8.\w3.\w3.\w8\w8 Where am I?/
+		\x\s[0]\b[5]  (He finally seems to notice you.)/
+		\x\s[0]\b[1]  O-\w3oh!\w4 Hi there!\w8 You- \w5You're a human!/
+		\x\c\s[0]\b[3]  (He appears to be freaking out.)/
+		\x\c\s[0]\b[8]  \f[bold,true]\f[height,18]YOU'RE A HUMAN!!\f[bold,false]\f[height,16]/
+		\s[0]\w6\w2\n\n[half]Wait-\w2 sorry,\w1 I shouldn't shout...\w8\w8\w5/
+		\c\s[0]\b[6]  But you're actually a human!\w8 \s[0]\f[height,14]I haven't talked to a human in so long...\f[height,16]\w8\w8/
+		\c\s[0]\b[6]  B-\w5But hi! \w8I'm a Ghostie, \w5as you can see... \w8\w8What about you?\w8 What's your name?\x\![open,inputbox,OnNameTeach,-1]/
+		\![leave,passivemode]"
+		
+		//\w5\_q\![*]\q[He/Him/His,choicefirsthehim]\n/
+		//\![*]\q[She/Her/Hers,choicefirstsheher]\n/
+		//\![*]\q[They/Them/Their,choicefirsttheythem]\e"
+ 	}
+	else
+ 	{
+		//--Dialogue for when the user uninstalls and reinstalls ghost. 
+		//noexp
+ 		{
+		//"Oh... I'm back here."
+		//"I thought you didn't want me around anymore...? I'm confused."
+ 		"\0\s[0]\b[8]  Oh...\w8 I'm back here.\w8\w8\w8\x/
+		\c\s[0]\b[3]  I thought you didn't want me around anymore...?\w8/
+		\s[0]\n\n\n[half]\f[height,13]I'm confused\w2.\w2.\w2.\w8\e"
+		}
+ 	}
+}
+
+//-----Select pronouns
+//--Him/he/his
+Select.choicefirsthehim
+{
+	presuffix = "masculine"
+	himher = "him"
+	heshe = "he"
+	hisher = "his"
+}
+//--Her/she.her
+Select.choicefirstsheher
+{
+	presuffix = "feminine"
+	himher = "her"
+	heshe = "she"
+	hisher = "her"
+}
+//--Them/They/Their
+Select.choicefirsttheythem
+{
+	himher = "them"
+	heshe = "they"
+	hisher = "theirs"
+}
+
+
+//--NameInput
+NameInput
+{
+	//Note that there's a \![leave,passivemode] tag in this dialogue! Don't forget about this! If you leave them in passivemode they won't talk at all and it'd sort of defeat the purpose, right? I actually forgot this for a while with Hunter and Smoker and didn't notice because OnFirstBoot only runs once, so it took me some testing to find out what was wrong. Always make sure to leave passivemode when you're done with it!
+	
+	"\1\s[10]Now that the pronouns are set, we will ask for the user's name. \![leave,passivemode]\w8\0\s[0]What is your name, user? \![open,inputbox,OnNameTeach,-1]\e"
+	
+	//At the end of this dialogue there's a tag saying "\![open,inputbox,OnNameTeach,-1]". It basically leads to the naming function defined in nameteach.dic, so don't touch it. Make sure it's there though! Otherwise your user won't have a way to put in their name. :o
+	
+	//*********************Advanced User Info*******************************
+	//What this tag basically means is that you're calling a function at the end of the dialogue with the \! tag, you are telling it to open, you're telling it to open an inputbox, and you're telling that inputbox to link to a function called OnNameTeach, which is in the nameteach.dic file. Remember what I said about On functions? I talked a bit about this in the SakuraScripting walkthrough page and the coding page.
+	//The -1 at the end determines how long the box will be open until it times out. -1 means it shouldn't time out at all, I think.
+	//***********************************************************************
+}
+
+//----GetTimeSlot
+//--Tell what time of day it is
+GetTimeSlot
+{
+	if hour >= 5 && hour <= 8
+	{
+		"earlymorning"
+	}
+	elseif hour >= 9 && hour <= 11
+	{
+		"morning"
+	}
+	elseif hour >= 12 && hour <= 14
+	{
+		"lunch"
+	}
+	elseif hour >= 15 && hour <= 17
+	{
+		"afternoon"
+	}
+	elseif hour >= 17 && hour <= 19
+	{
+		"evening"
+	}
+	elseif hour >= 20 && hour <= 23
+	{
+		"latenight"
+	}
+	else
+	{
+		"midnight"
+	}
+}
+
+//----GetDaySlot
+//--Find out what day it is. 
+GetDaySlot
+{
+	"%(month)month %(day)day"
+}
+
+
+//-------Normal Booting
+OnBoot
+ {
+	lastTalk = "" 
+	passmin = 0
+	passsec = 0
+	
+ 	"\0\s[0]\1\s[10]" //Sets them up in their neutral pose.
+	
+	--
+	dayslot = GetDaySlot
+	timeslot = GetTimeSlot 
+	
+	if dayslot == userbirthday //Checks if today is the User's birthday. 
+	{
+				"\0\s[0]It's %(bornmonthprint) %(borndayprint).\w8\1\s[10]Happy birthday, %(username).\e" 
+	}
+	elseif dayslot == "6month 6day"
+	{
+				"\0\s[0]Today is June 6th.\e"
+	}
+	elseif dayslot == "7month 4day"
+	{
+				"\1\s[10]It's the fourth of July.\e"
+	}
+	else
+	{
+		"%(normalboottalk)" //If none of the days above match the current date, the ghost instead will go down to the next function, normalboottalk.
+	}
+}
+
+
+//---Normal Boot Talk
+normalboottalk
+{
+	if weekday == 6 && hour >= 19 //This checks if the weekday equals six, meaning saturday AND (using the && operator) if the hour is past 19. You can change these numbers or values to anything you like! As such you can check any combination of date and day and time for potential boot dialogue. You can also add more elseif checks for other days if you want.
+		{
+		//noexp
+		//"It's Saturday night."
+		//"I usually go stargazing around this time with my cactus. What about you?"
+		"\0\s[0]\b[2] It's Saturday night\w2.\w2.w2.\w8\w8/
+		\c\s[0]\b[6] I usually go stargazing around this time with my cactus./
+		\s[0]\n\n[half]What about you?"
+		}
+	elseif RAND(100) <= 40 //40% chance of happening.
+		{
+		"\0\s[0]This is one of the random boot conversations.\w8\1\s[10]The random number drawn was less than forty.\e"
+	
+		"\1\s[10]This is another one of the random boot conversations.\w8\0\s[0]The random number was again less than forty.\e"
+	
+		"\0\s[0]This is the third random boot conversation.\w8\1\s[10]The random number was less than forty.\e"
+		}
+ 	else
+ 	{
+		if timeslot == "earlymorning" 
+		{
+			//noexp
+			//"Good morning~ You're up early today."
+			"\0\s[0]\b[0]  Good morning!\w8\w5/
+			\s[0]\n\n[half]You're up early today.\e"
+			//"Good morning! How was your sleep?"
+			"\0\s[0]\b[4]\n  Good morning! /
+			\w8How was your sleep last night?\w8\w5\n\n[half]/
+			\![*]\q[It was good,choicegoodsleep]\n/
+			![*]\q[Not great,choicebadsleep]"
+			//"Hi! How are you doing? Did you sleep well?"
+			"\0\s[0]\b[3]\n  Hi! \w3/
+			How are you doing? \w8\w3\n\n[half] /
+			Did you sleep well?\w8\w5\n\n[half]/
+			\![*]\q[Yep I did,choicegoodsleep]\n/
+			\![*]\q[No I didn't,choicebadsleep]"
+			//"Hi there. Good morning to you."
+			"\0\s[0]\b[3]\n  Hi there.\w8\w2\n\n[half] /
+			Goooooo\w1o\w1o\w1d\w1 morning to you.\e"
+			//"Morning~"
+			"\s[0]\b[8]\n\n\n       \f[height,20]Morning~\f[height,16]\e"
+			//"Morning! How was your sleep?"
+			"\0\s[0]\b[4]\n  Morning! /
+			\w8How was your sleep last night?\w8\w5\n\n[half]/
+			\![*]\q[It was good,choicegoodsleep]\n/
+			![*]\q[Not great,choicebadsleep]"
+		}
+		elseif timeslot == "morning"
+		{
+			//"Morning~"
+			"\s[0]\b[8]\n\n\n       \f[height,20]Morning~\f[height,16]\w8\e"
+			//"Morning~ How are you doing this morning?"
+			"\0\s[0]\b[1]        \f[height,20]Morning~\f[height,16]\w8\w4/
+			\n\nHow are you doing this morning?\w8\w5\n\n[half]/
+			\![*]\q[Good,choicemorninggood]\n/
+			\![*]\q[Bad,choicemorningbad]"
+			//"Morning~ How are you doing, %(username)?"
+			"\0\s[0]\b[1]        \f[height,20]Morning~\f[height,16]\w8\w4/
+			\n\n[half]How are you doing, %(username)?\w8\w5\n\n[half]/
+			\![*]\q[Good,choicemorninggood]\n/
+			\![*]\q[Bad,choicemorningbad]"
+			//"Good morning. Have you eaten breakfast yet?"
+			"\0\s[0]\b[6]  Good morning.\w8 /
+			\n\n[half]Have you eaten breakfast yet?\w8\n\n[half]/
+			\![*]\q[Yes,choicebreakfastyes]\n/
+			\![*]\q[No,choicebreakfastno]"
+			//"Hi! Have you have breakfast yet, %(uesrname)"
+			"\0\s[0]\b[6]  Hi!\w8 /
+			\n\n[half]Have you have breakfast yet, %(username)?\w8\n\n[half]/
+			\![*]\q[Yes,choicebreakfastyes]\n/
+			\![*]\q[No,choicebreakfastno]"
+			//"Morning, %(username)!"
+			"\s[0]\b[3]  Morning, \w4%(username)!\w8\e"
+			//"Hello! Good morning!"
+			"\s[0]\b[8]  Hello!\w8 Good morning!\w8\e"
+		}
+		elseif timeslot == "lunch"
+		{
+
+		}
+		elseif timeslot == "afternoon"
+		{
+
+		}
+		elseif timeslot == "evening"
+		{
+
+		}
+		elseif timeslot == "latenight"
+		{
+ 
+		}
+		else
+		{
+
+		}
+	}
+}
+
+Select.choicegoodsleep
+{
+	//noexp
+	//"That's good."
+	"\s[0]\b[4] That's good.\e"
+	"\s[0]\b[5] That's good.\e"
+	"\s[0]\b[6] That's good.\e"
+	"\s[0]\b[8] That's good.\e"
+}
+Select.choicebadsleep
+{
+	//noexp
+	//"Aww..."
+	"\s[0]\b[2] Aww\w2.\w2.\w2.\w2\w8\e"
+	"\s[0]\b[3] Aww\w2.\w2.\w2.\w2\w8\e"
+	"\s[0]\b[5] Aww\w2.\w2.\w2.\w2\w8\e"
+	"\s[0]\b[6] Aww\w2.\w2.\w2.\w2\w8\e"
+	//"Aww... That's a shame."
+	"\s[0]\b[5] Aww\w2.\w2.\w2.\w8 That's a shame\w2.\w2.\w2.\w2\w8\e"
+	"\s[0]\b[6] Aww\w2.\w2.\w2.\w8 That's a shame\w2.\w2.\w2.\w2\w8\e"
+}
+Select.choicemorninggood
+{
+	//noexp
+	"\b[0]"
+	"\b[1]"
+	"\b[2]"
+	"\b[3]"
+	"\b[4]"
+	"\b[5]"
+	"\b[6]"
+	"\b[8]"
+	--
+	//"That's good."
+	"\s[0]  That's good.\w8\e"
+	//"Great! I'm doing pretty good too."
+	"\s[0] Great! \w8I'm doing pretty good too.\w8\e"
+	//"That's great! I'm doing pretty dandy myself."
+	"\s[0]  That's great! \w8I'm doing pretty dandy myself.\w8\e"
+	//"Cool. I'm the same."
+	"\s[0]  Cool. \w8I'm the same.\w8\e"
+	//"Cool. Hope your day continues to be good."
+	"\s[0]  Cool. \w8Hope your day continues to be good.\\w8e"
+	//"Nice!"
+	"\s[0]  Nice!\w8\e"
+	//"A good start to your day then! That's nice."
+	"\s[0]  A good start to your day then! \w8That's nice.\w8\e"
+}
+Select.choicemorningbad
+{
+	"\b[0]"
+	"\b[1]"
+	"\b[2]"
+	"\b[3]"
+	"\b[4]"
+	"\b[5]"
+	"\b[6]"
+	"\b[8]"
+	--
+	//noexp
+	//"Aww... I hope things get better for you soon..."
+	"\s[0]  Aww\w2.\w2.\w2.\w8\w2 /
+	I hope things get better for you soon\w2.\w2.\w2.\e"
+	"\s[0]  That's a shame\w2.\w2.\w2.\w8\w3 Hopefully you cheer up soon.\e"
+	//"Aww... I don't want you to be upset... Cheer up soon, okay?"
+	"\s[0]  Aww\w2.\w2.\w2.\w8\w3 /
+	I don't want you to be upset\w2.\w2.\w2.\w8\w8\w5 /
+	\c\b[3]\s[0]  Cheer up soon, \w8okay?"
+	//"Aww... That wasn't the answer I was hoping for... 
+	//I hope you feel better soon..."
+	"\s[0]  Aww\w2.\w2.\w2.\w8\w3 /
+	That wasn't the answer I was hoping for\w2.\w2.\w2.\w8\w3 /
+	\s[0]I hope you feel better soon\w2.\w2.\w2.\w8\e"
+	//"Oh... okay..."
+	"\s[0]  Oh\w2.\w2.\w2.\w8\w3 okay\w2.\w2.\w2.\w8\e"
+	//"Oh... I hope things get better for you soon."
+	"\s[0]  Oh\w2.\w2.\w2.\w8\w3 I hope things get better for you soon.\e"
+	//Oh... I hope you'll cheer up soon."
+	"\s[0]  Oh\w2.\w2.\w2.\w8\w3\n\n[half]/
+	\s[0]I hope you'll cheer up soon\w2.\w2.\w2.\w8\e"
+}
+Select.choicebreakfastyes
+{	
+	if RAND(100) <= 10
+	{
+		"\0\s[0]\b[2]  Oh!\w5 What did you have?\w8\w\n\n[half]/
+		[open,inputbox,inputuserbreakfast,-1]"  
+		//10% chance
+	}
+	else
+	{
+		"\b[0]"
+		"\b[1]"
+		"\b[2]"
+		"\b[3]"
+		"\b[4]"
+		"\b[5]"
+		"\b[6]"
+		"\b[8]"
+		--
+		//noexp
+		"\s[0]That's good.\w8\w2\n\n[half]/
+		\s[0]Make sure to take care of yourself,\w4 %(username)."
+		"\s[0]Yay~!\w8\w2/
+		\s[0]That's good."
+		"Glad to hear that. Take care of yourself, okay, %(username)?"
+		"Glad to hear you're taking care of yourself, %(username)."
+	}
+} 
+
+inputuserbreakfast
+{
+	//noexp
+	"\b[0]"
+	"\b[2]"
+	"\b[5]"
+	"\b[8]"
+	--
+	"That sounds nice..."
+	"That sounds good..."
+	"Sounds delcious."
+	"Sounds yummy~"
+	" Oh!\w5 Did you enjoy it?\n\n[half]/
+	\![*]\q[Yes,choicebreakfastenjoy]\n/
+	\![*]\q[No,choicebreakfastnotenjoy]"
+	"  Oh!\w5 That sounds interesting\w2.\w2.\w2.\w8\w3 /
+	\n\n[half]Did you enjoy it?\w8\w8\n\n[half]/
+	\![*]\q[Yes,choicebreakfastenjoy]\n/
+	\![*]\q[No,choicebreakfastnotenjoy]"
+	"  Sounds nice!\w8  Did you enjoy it?\w8\w8\n\n[half]/
+	\![*]\q[Yes,choicebreakfastenjoy]\n/
+	\![*]\q[No,choicebreakfastnotenjoy]"
+}
+Select.choicebreakfastenjoy
+{
+	"\b[3]"
+	"\b[4]"
+	"\b[5]"
+	--
+	//noexp
+	"\s[0]  Nice!\w8\e"
+	"\s[0]  That's good!\w8\e"
+	"\s[0]  Yay~\w8\e"
+}
+
+Select.choicebreakfastnotenjoy
+{
+	"\b[5]"
+	"\b[6]"
+	"\b[8]"
+	--
+	//noexp
+	"\s[0]  Oh\w2.\w2.\w2.\w8\e"
+	"\s[0]  Oh\w2.\w2.\w2.\w8\n\n[half]/
+	\s[0]I'm sorry\w2.\w2.\w2.\w8\e"
+	"\s[0]  Oh\w2.\w2.\w2.\w8\n\n[half]/
+	\s[0]Hopefully lunch will be better\w2.\w2.\w2.\w2?\w8\e"
+}
+
+Select.choicebreakfastno
+{
+	if RAND(100) <= 40
+	{
+		//"Oh... I hope you go and get breakfast soon?"
+		"\s[0]  Oh\w2.\w2.\w2.\w8\n\n[half]/
+		I hope you go and get breakfast soon?\w8\w8\n\n[half]/
+		\![*]\q[I will,choicebreakfastnobutwill]\n/
+		\![*]\q[I probably won't,choicebreakfastnoandwont]"
+	}
+	else
+	{
+		"\b[2]"
+		"\b[4]"
+		"\b[6]"
+		"\b[8]"
+		--
+		"\s[0]  Well then you should!\w8\n\n[half]You need to eat,\w3 %(username)!\w8\e"
+		"\s[0]  You should probably go do that\w2.\w2.\w2.\w2\w8\n\n[half]/
+		Skipping breakfast isn't good for you\w2.\w2.\w2.\8\e"
+		"\s[0]  Aww\w2.\w2.\w2.\w2\w8 I hope you get something to eat soon.\8\e"
+	}
+}	
+
+Select.choicebreakfastnobutwill
+{
+	"\b[1]"
+	"\b[2]"
+	"\b[5]"
+	"\b[6]"
+	--
+	//noexp
+	"\s[0]  Ok!"
+	"\s[0]  Good!"
+}
+Select.choicebreakfastnoandwont
+{
+	"\b[3]"
+	"\b[4]"
+	"\b[8]"
+	"\b[0]"
+	--
+	//noexp
+	"\s[0]  Oh, okay..."
+	"\s[0]  Oh..."
+	"\s[0]  Oh... Sorry for bothering you then..."
+}
+
+OnClose
+ {
+ timeslot = GetTimeSlot //This checks the time.
+ --
+	if passmin >= 5	//Checks if you'd have the ghost open for 5 minutes.
+		{
+			if RAND(100) <= 40 //40% chance happening
+			{
+				"\0\s[0]This is a random close dialogue.\w8\1\s[10]The random number generator chose something below 40.\w8\w8"
+			}
+			else
+			{
+			if timeslot == "earlymorning"
+				{
+					"\1\s[10]This is an early morning close dialogue.\w8\0\s[0]From 5 to 8.\w8"
+					
+					"\0\s[0]This is another early morning close dialogue.\w8\1\s[10]Yup.\w8\w8"
+				}
+			elseif timeslot == "morning"
+ 				{
+ 					"\0\s[0]This is a morning close dialogue.\w8\w8"
+ 				}
+ 			elseif timeslot == "lunch"
+ 				{
+ 					"\0\s[0]This is a lunch close dialogue.\w8\1\s[10]Yup.\w8"
+					
+ 					"\0\s[0]This is another lunch close dialogue.\w8\1\s[10]In the middle of the day.\w8"
+ 				}
+ 			elseif timeslot == "afternoon"
+ 				{
+ 					"\0\s[0]This is an afternoon close dialogue.\w8\1\s[10]Done.\w8"
+					
+ 					"\1\s[10]This is another afternoon close dialogue.\w8\0\s[0]Yup.\w8"
+ 				}
+  			elseif timeslot == "evening"
+ 				{
+ 						if weekday == 6 //here, a nested if statement is checking that if it's evening, is it also saturday? You can do this to check more specific times on other days as well. You can change this to some other day if you want, or just delete this little if/else section entirely and write your own evening related close dialogue.
+ 						{
+ 							"\0\s[0]This is a Saturday evening close dialogue.\w8\1\s[10]Somewhat specific.\w8"
+ 						}
+ 						else //if it's not saturday, then it'll do this dialogue instead.
+ 						{
+ 							"\0\s[0]This is an evening close dialogue.\w8\1\s[10]Bye.\w8"
+							
+ 							"\1\s[10]This is another evening close dialogue.\w8\0\s[0]Yup.\w8"
+ 						}
+ 				}
+			elseif timeslot == "latenight"
+			 	{
+ 						if weekday == 6 //This is the same check as above to see if it's Saturday. Note that this doesn't have an else statement! Sometimes you can get away with that, but make sure you test thoroughly.
+						//Of course, you can also cut this check entirely if you want.
+ 						{
+ 							"\0\s[0]This is a late Saturday night close dialogue.\w8"
+							
+ 							"\1\s[10]This is another late Saturday night close dialogue.\w8\0\s[0]Yup.\w8"
+ 						}
+						
+ 						"\1\s[10]This is a late night close dialogue.\w8\0\s[0]That it is.\w8"
+						
+						"\0\s[0]This is another late night close dialogue.\w8\1\s[10]Done.\w8"
+ 				}
+			else //like above, this is the midnight time slot since it's the last one left.
+ 				{
+ 						if weekday == 0 //checking if it's the middle of the night on Sunday
+ 						{
+ 							"\1\s[10]This is a middle of the night Sunday close dialogue.\w8\0\s[0]From midnight to five AM on Sunday.\w8"
+ 						}
+						"\0\s[0]This is a middle of the night close dialogue.\w8\1\s[10]Very late at night.\w8"
+						
+						"\1\s[10]This is another middle of the night close dialogue.\w8"
+						
+						"\1\s[10]This is the third middle of the night close dialogue.\w8\0\s[0]So it is.\w8"
+				}
+			}
+				
+ 		}
+ 		
+ 		
+ 	else //This dialogue is for if they haven't been open for at least five minutes.
+ 	{
+ 		"\0\s[0]This dialogue is for closing us before five minutes have passed.\w8\w8"
+		
+ 		"\1\s[10]This is another bit of dialogue for closing us before five minutes have passed.\w8\0\s[0]Quickly done.\w8\w8"
+ 	}
+ 	--
+	"\-\e" //this bit of code actually closes and ends the ghost. Because \e is here, you don't have to end each line above with it. Again, this will come up very rarely, so OnClose is an unusual case.
+ }
+
+
+ //-------------------------State Changing--------------------
+ //From here on, most of the dialogue will have to do with changing shells, ghosts, or states in some way.
+ 
+
+//--OnWindowStateRestore
+
+//This will run when you minimize them and then bring them back up. Replace with what you like.
+
+OnWindowStateRestore
+ {
+	"\0\s[0]This dialogue means we were minimized.\w8\1\s[10]Then brought back up.\e"
+}
+
+
+//--OnGhostChanging
+
+//This runs whenever you change or reload the ghost. You can change ghosts by going into the right click menu and going to Change Ghost, but this dialogue will also be called if you reload them using Utilities->Reload Ghost. Protip: If you are going to make a ghost, you will be reloading it A LOT.
+//Note: If you reload your ghost using the developer console instead of Utilities->Reload Ghost, it won't do this dialogue, so don't freak out if it doesn't show up.
+ 
+OnGhostChanging
+ {
+	if reference0 == "Girl" //Replace this with the name of your Sakura character as you put in install.txt or descript.txt. I set this up to use the full ghost's name with Hunter and Smoker but I forget exactly how I did it and I'm having trouble getting it to work again. I think I just didn't define the Sakura or Kero names in either descript.txt or install.txt. You can experiment with it yourself. Otherwise, leave it as your Sakura character's name.
+	{
+		"\0\s[0]This dialogue is for us reloading ourselves.\w8\w8\e"
+		//Replace this dialogue with whatever you like.
+	}
+ 	else //If you're switching to another Ghost.
+	{
+		"\0\s[0]This dialogue means we are switching to %(reference0).\w8\1\s[10]Bye.\w8\w8\e"
+		
+		//Replace this dialogue with whatever you like. Notice the use of the %(reference0) envelope here? In OnGhostChanging, %(reference0) stores the name of the ghost being swapped to, so if you want to display what you're switching to, you can use %(reference0) as in this example. You don't have to use %(reference0) if you don't want to though.
+	}
+}
+
+
+//--OnGhostChanged
+
+//A sister to the above, this runs after the ghost has either reloaded itself, or when you switch from another ghost to this ghost.
+
+OnGhostChanged
+{
+	"\0\s[0]\1\s[10]" //this sets up their default poses
+	--
+	if reference0 == "Girl" //As above, this should be the name of your ghost as in install.txt or descript.txt.
+	{
+		"\0\s[0]We have reloaded ourselves.\1\w8\s[10]Sure have.\e"
+	}
+	else //If you're switching to them from another ghost...
+	{
+		"\1\s[10]Goodbye, %(reference0).\w8\0\s[0]Someone switched from you to us.\e"
+
+		//Again, %(reference0) in this function is the name of the ghost in question. As above, replace these two lines of dialogue what what'd be appropriate for your ghost.
+	}
+}
+
+
+//--OnShellChanging
+
+//This will run when you change your ghost's shell. If you don't have any other shells for your ghost, you can safely ignore this but don't delete it, you might as well keep it just in case. I probably won't add a different shell to this template because shells are a lot of work ugh, but for the sake of argument, let's pretend I did.
+
+OnShellChanging
+ {
+	if reference0 == "Hypothetical Shell that doesn't actually exist" //reference0 in OnShellChanging is the name of the shell you're swapping to. It should be defined in the descript.txt file in your shell folder. If you do have alternate shells, put in the right name here.
+	{
+	"\1\s[10]This dialogue is specifically for changing to this particular shell.\w8\0\w8\s[9]It totally exists.\w8\e"
+	//Then rewrite this line as appropriate.
+	}
+	else //if you don't have any specific dialogue for a specific shell
+	{
+	"\0\s[0]This dialogue is for changing shells.\w8\1\s[10]Sure is.\w8\e"
+	
+	"\1\s[10]This is another bit of dialogue for changing shells.\w8\0\s[8]I wonder how many people will actually have multiple shells?\e"
+	
+	//Rewrite these two lines as you need.
+	}
+ }
+ 
+ 
+ //--OnShellChanged
+ 
+ //The sister to the above, this is the dialogue after you've changed the shell.
+ 
+OnShellChanged
+ {
+ 	if reference0 == "Ghostie Default Shell" //Shell name in descript.txt file.
+ 	{
+ 		nowshell = "default" //This is the folder name for your shell. Not the same as the above! 
+		
+ 		"\0\s[0]This dialogue is for switching to our default shell.\w8\1\s[18]No really, will anyone actually put in the work to use these functions?\w8\0\s[9]\n\n[half]Shh.\e"
+		//Replace dialogue as required.
+ 	}
+ 	elseif reference0 == "Hypothetical Shell that doesn't actually exist" //You can use as many elseifs for as many shells as you've got.
+ 	{
+ 		nowshell = "totallyrealshell"
+		
+ 		"\0\s[0]This dialogue is for switching to that hypothetical shell.\e"
+		
+ 		"\0\s[0]This is another bit of dialogue for switching to this hypothetical shell.\w8\1\s[18]Man if you actually use this, you should tell Zar, it'll blow her mind.\w8\0\n\n[half]\s[9]Shut up, we're not supposed to be in-character here.\e"
+		//Replace these bits with whatever you have in mind.
+ 	}
+ 	elseif reference0 == "Another totally real shell wow"
+ 	{
+ 		nowshell = "thiswouldbesomuchwork"
+		
+ 		"\1\s[10]This dialogue is after we've switched to another totally real shell.\e"
+		//Replace this as well.
+ 	}
+ 	else //For any shell without a specific name, or if you don't want to bother with individual responses to a shell.
+ 	{
+	"\0\s[0]This dialogue is after we've changed our shell to %(reference[0]).\w8\1\s[18]How many shells you got?\e"
+	
+	//Note the %(reference[0]) here! This time that should store the name of whatever shell you're switching to. To be honest, I have not experimented with this too much because making shells is a pain in the tuckus, but I'm going to take cindysuke's coding on faith and assume reference[0] is correct instead of reference0. Replace this bit of dialogue as you need.
+	}
+ }
+
+
+ //--OnDressupChanged
+ 
+ //This runs whenever you fiddle with their clothing via the dress-up option, if you've set any for your ghost. Honestly setting up clothing is a nightmare and I hate doing it, and if your ghost is going to be moving around substantially or at all, clothing won't stay in the right place anyway. So unless you're like a real expert on surfaces.txt coding and rigging up clothing for different poses or you're intense or dedicated enough to set up clothing in the right place for every pose you do, I would not bother with clothing for your ghost.
+ //HOWEVER I can't begrudge people who actually would put in that effort! And in that case, this function is for you. For now, I'll fill this in with some hypothetical items. Replace the dialogue below with whatever you need.
+
+OnDressupChanged
+{
+if reference0 == 0 //in OnDressupChanged, reference0 refers to the character, therefore this is evaluating which character in question is getting dressed up. 0 is the main character, as you know from the walkthrough by now.
+	{
+	if reference1 == "Clothing for Girl" //This is the name of the clothing item in the descript.txt file, I'm pretty sure.
+		{
+			if reference2 == 1 //This checks if you're putting it on.
+			{
+			"\0\s[0]You put my clothing item on me.\w8\1\s[19]lol like zar would ever bother with clothes for a ghost.\w8\0\s[9]\n\n[half]Shut up dude you're going to get us in trouble.\e"
+			}
+			else // This checks if you're taking it off.
+			{
+			"\0\s[0]You took the clothing item off.\e"
+			}
+		}		
+	}
+else //if reference0 isn't the main character, then it has to be the side character.
+	{
+	if reference1 == "some kind of clothing for triangle??" //The name of the item of clothing in the descript.txt file in your shell folder.
+		{
+			if reference2 == 1 //If you put it on
+			{
+			"\1\s[10]I'm wearing some kind of clothing.\w8\0\s[8]Maybe a hat?\e"
+			}
+			else //When you take it off.
+			{
+			"\1\s[10]You took off some kind of clothing.\e"
+			}
+		}
+	elseif reference1 == "i'm gonna say a propeller beanie" //As you've seen above, you can use elseifs to expand the list if you have more than one item.
+		{
+			if reference2 == 1 //if you're putting it on
+			{
+			"\1\s[10]You put a hat on me.\w8\0\s[6]lol.\w8\1\n\n[half]\s[11]Shaddap.\e"
+			}
+			else //when you take it off
+			{
+			"\1\s[10]You took off the hat.\e"
+			}
+		}
+	}
+}
+
+//If you are super dedicated to doing clothes, I'd recommend checking out some more in-depth FLELE tutorials for stuff about clothing until I muster up the energy to write a walkthrough page for it.

@@ -1,0 +1,161 @@
+﻿//---------------------------The User's Name--------------------------
+//This .dic file has to do with setting the user's name and suffix/prefix. You may recall some of the functions mentioned here from bootend.dic. As you can see, you can spread functions across multiple .dic files if you like! Just remember my note in bootend.dic about the different between OnFunction and Function.
+
+//This file is fairly short, so don't worry! It shouldn't take you too long to finish.
+
+//Make sure to read the walkthrough (http://www.ashido.com/ukagaka/walkthrough.html) for more details about how to properly format ghost dialogue!
+//I will reiterate that you should be editing these in Notepad++, and in particular, you should set the Language to C (or Java I guess) to properly highlight all the text. It will make things A LOT EASIER for you, trust me! It will also help you keep track of your brackets in case you forget some. If you click on a line with a bracket in Notepad++, it should highlight where the other bracket ends, or turn purple if there's no finishing bracket (which you should definitely fix!)
+//It will also highlight my commented lines in green, so you'll know where they are. Any line beginning with // is a commented line that the code will not read. It's just for your reference!
+
+
+//OnTeachName
+OnTeachName	
+{
+	if reference0 == "TEACHNAME" 
+		{
+			//noexp
+		"\0\s[0]\b[4]  You'd like me to call you something else?\w8\w8\n\n[half]/
+		\0\s[0]What would you like me to call you?\![open,inputbox,OnNameTeach,-1]\e"
+		}
+	else
+		{
+		}
+}
+
+OnNameTeach
+{
+	tempname = reference0 //this stores the name value temporarily in reference0
+	
+	if reference0 == "Pumpkin" || reference0 == "pumpkin" 
+	{
+		//"...... no"
+		//noexp
+		"\0\s[0]\b[6]\f[height,25]\n\n     .\w4 .\w4 .\w4 .\w4 .\w4 .\w8\w8\w8\c/
+		\b[4]\w8\n\n\n\n[half]\f[height,25]         No.\f[height,16]\x\![open,inputbox,OnNameTeach,-1]"
+	}
+	elseif reference0 == "Cactie" || reference0 == "cactie" 
+	{
+		//"But that's the name of my cactus!"
+		//"I can't call you that!"
+		//"How about another name...?"
+		//noexp
+		"\0\s[0]\b[5]\n[half] \f[height,18]But that's the name of my cactus!\f[height,16]\w8\w8/
+		\n\n[half]\s[0]I can't call you that!\w8\w8/
+		\n\n[half]How about another name\w2.\w2.\w2.\w2?\x/
+		\![open,inputbox,OnNameTeach,-1]"
+	}
+	elseif reference0 == "" || reference0 == " " || reference0 == "   " //This is if the user doesn't put in a name at all, since that'd also get awkward in dialogue. Admittedly if a user REALLY wanted to put a ton of spaces as their name, the OR operators can only go so far, but this situation would mostly come up by accident I'd figure from a user hitting enter too quickly.
+	{
+		username = "Anon" 
+		//"Oh, you didn't put in anything..."
+		//"So I guess I'll call you Anon for now!"
+		//Isn't it a cute name?"
+		//noexp
+		"/1\s[12]\b[0]  Oh, \w5you didn't put in anything\w2.\w2.\w2.\w8\w8\w5/
+		\c\b[4]\s[0]\nSo I guess I'll call you Anon for now!\w8\w8/
+		\s[0]\n\n[half]\f[height,13]Isn't it a cute name?\f[height,16]\e"
+		"\1\s[10]You didn't put in anything.\w8\0\s[0]We will call you NULL.\e"
+	}
+	else
+	{
+		"\0\s[12]  Do you want a title?\w8\w4\n\n[half]"
+		--
+		"\![*]\q[-chan,titlechan]\n/
+		\![*]\q[-kun,titlekun]\n/
+		\![*]\q[-san,titlesan]\n/
+		\![*]\q[-senpai,titlesenpai]\n/
+		\![*]\q[-tan,titletan]\n\n[half]"
+		--
+		if presuffix != "feminine"
+		{
+		"\![*]\q[-hyung,titlehyung]\n"
+		}
+		else
+		{}
+		--
+		if presuffix != "masculine"
+		{
+		"\![*]\q[-noona,titlenoona]\n"
+		}
+		else
+		{}
+		--
+		"\![*]\q[-ssi,titlessi]\n/
+		\![*]\q[-sunbae,titlesunbae]\n\n[half]/
+		\![*]\q[Nope,titlenone]\e"
+	}
+}
+
+//----Titles
+//--no title
+Select.titlenone
+{
+		username = tempname
+		NameDone
+}
+//--chan
+Select.titlechan
+{
+		username = tempname + "-chan"
+		NameDone
+}
+//--kun
+Select.titlekun
+{
+	username = tempname + "-kun"
+	NameDone
+}
+//--san
+Select.titlesan
+{
+	username = tempname + "-san"
+	NameDone
+}
+//--senpai
+Select.titlesenpai
+{
+	username = tempname + "-senpai"
+	NameDone
+}
+//--tan
+Select.titletan
+{
+	username = tempname + "-tan"
+	NameDone
+}
+//--hyung
+Select.titlehyung
+{
+	username = tempname + "-hyung"
+	presuffix = "masculine"
+	NameDone
+}
+//--noona
+Select.titlenoona
+{
+	username = tempname + "-noona"
+	presuffix = feminine
+	NameDone
+}
+//--ssi
+Select.titlessi
+{
+	username = tempname + "-ssi"
+	NameDone
+}
+//--sunbae
+Select.titlesunbae
+{
+	username = tempname + "-sunbae"
+	NameDone
+}
+
+
+//--NameDone
+//This is the final bit of dialogue your ghosts will have when the user changes their name.
+
+NameDone
+{
+	//noexp
+	"\0\s[0] Ok!\w7 \s[0]I will now call you %(username).\e"
+}
