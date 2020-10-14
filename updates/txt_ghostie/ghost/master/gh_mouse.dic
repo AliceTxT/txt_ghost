@@ -88,7 +88,7 @@ MouseMoveKero
 				if CleanCactie == "FALSE"
 				{
 					//noexp
-					"\s[10]"
+					"\1\s[10]"
 					--
 					"\b[0]"
 					"\b[1]"
@@ -118,7 +118,7 @@ MouseMoveKero
 				}
 				else
 				{
-					"\s[10]"
+					"\1\s[10]"
 					--
 					"\b[0]"
 					"\b[1]"
