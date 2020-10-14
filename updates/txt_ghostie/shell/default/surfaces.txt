@@ -759,7 +759,7 @@ surface28 //innocent-looking
  
 	38interval,runonce
 	38pattern0,-1,0,overlay,0,0
-	38pattern1,1920,50,overlay,0,0
+	38pattern1,1920,0,overlay,0,0
 	38pattern2,1921,50,overlay,0,0
 	38pattern3,1922,50,overlay,0,0
 	38pattern4,1920,50,overlay,0,0

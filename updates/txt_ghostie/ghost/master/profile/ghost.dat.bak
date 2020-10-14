@@ -1,8 +1,9 @@
 Charset,UTF-8
 __system_settings_version__,2
 balloon,D:\video games\SSP\balloon\txt_skulls\
+GroupFlagOverride,noupdateauto,
 Char8.center,759
-scriptbox.left,1195
+scriptbox.left,1317
 Char9.center,642
 Char7.center,414
 Char5.center,575
@@ -14,12 +15,12 @@ Char11.center,654
 Char.VirtualDesktop,bb64d5b7-4de3-4ab2-a87c-db7601aea7dc
 Char4.center,527
 Char2.center,549
-Char0.center,556
-scriptbox.top,319
+Char0.center,448
+scriptbox.top,581
 shell,shell\default\
 FirstBoot,booted
 Char1.center,518
 shell.ischanged.2,1
-update.lastexec,655966228
+update.lastexec,656007869
 DeveloperPalette.visible,1
 __system_written_flag_do_not_remove__,written
