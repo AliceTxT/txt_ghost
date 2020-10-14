@@ -22,6 +22,7 @@ OnFirstBoot
 	AdmireCactie = "FALSE"
 	CleanCactie = "FALSE"
 	CactieNameKnow = "FALSE"
+	ThornCactie = "FALSE"
 	
 	
 	if reference0 == 0 
@@ -140,6 +141,7 @@ OnBoot
 	WaterCactie = "FALSE"
 	AdmireCactie = "FALSE"
 	CleanCactie = "FALSE"
+	ThornCactie = "FALSE"
 	
  	"\0\s[0]\1\s[10]" //Sets them up in their neutral pose.
 	

@@ -36,4 +36,5 @@ scope,0
 91,shiny
 92,love hearts
 93,...
+94,!
 }

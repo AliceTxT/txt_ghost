@@ -49,15 +49,14 @@ MouseMoveSakura
  		if stroke >= 40 //if the stroke count is above a certain number, the petting dialogue will kick in. You can change this number to make the petting take longer or shorter if you want. FLELEs have it set to 50 for some reason, which makes it take longer than this.
 		{
  			stroke = 0 //resetting the stroke count
-			if reference4 == "Head" //do you remember the names of the areas you set up for your collisions in surfaces.txt? This is where they come into play! This is where you'd put in the name of your collision, such as head, face, horns, tail, ears, whatever. As mentioned in surfaces.txt, you can add as many collisions to a pose as you want, as long as you make sure to add them all in here so they can actually be used.
+			if reference4 == "Stomach" 
  			{
 				
  			}
- 			elseif reference4 == "Face" //Another area set up by the collisions in surfaces.txt. You can expand this list with as many elseifs as you need depending on how many collisions you've set up.
- 			{
+ 			else
+			{
 				
- 			}
-			
+			}
  		}
 	}
  	else
@@ -78,10 +77,56 @@ MouseMoveKero
  		if stroke >= 40
 		{
 			stroke = 0
-			if reference4 == "Thorn" //Put in the name of your collision area you set up for your secondary character here.
+			if reference4 == "Thorns" 
  			{
-				
-				
+				stroke = 0
+				if ThornCactie == "FALSE"
+				{
+					"\1\s[94]"
+					--
+					"\b[0]"
+					"\b[1]"
+					"\b[2]"
+					"\b[3]"
+					"\b[4]"
+					"\b[5]"
+					"\b[6]"
+					"\b[8]"
+					--
+					"  You accidentally pricked yourself on the cactus."
+					"  You accidentally pricked yourself on the potted cactus."
+					"  You accidentally pricked yourself on the cactus' thorns."
+					"  You accidentally pricked yourself on the potted cactus' thorns."
+					"  You accidentally pricked yourself on the plant's thorns."
+					"  You accidentally pricked yourself on the thorns of the cactus."
+					--
+					"\w8\w8"
+					--
+					"\0\s[17]  \f[height,20]%(username)!\f[height,16] \w8\w8\w8\n\n[half]\s[15]\w8Be careful,\w3 %(username)\w2.\w2.\w2.\w8\e"
+					"\0\s[17]  \f[height,20]%(username)!\f[height,16] \w8\w8\w8\n\n[half]\s[15]\w8Be careful of the thorns,\w3 %(username)\w2.\w2.\w2.\w8\e"
+					--
+					ThornCactie = "TRUE"
+				}
+				else
+				{
+					"\1"
+					--
+					"\b[0]"
+					"\b[1]"
+					"\b[2]"
+					"\b[3]"
+					"\b[4]"
+					"\b[5]"
+					"\b[6]"
+					"\b[8]"
+					--
+					"  You've already injured yourself once. \w8\w5You don't want to do it again.\w8\e"
+					"  You've already pricked yourself on the cactus' thorns once. \w8\w5You don't want to do that again\w2.\w2.\w2.\w8\e"
+					"  You've already hurt yourself on the cactus' thorns once. \w8\w5You don't want to do that again."
+					"  You've already pricked yourself once. \w8\w5You don't want to do it again.\w8\e"
+					"  You've already injured yourself on the cactus' thorns before. \w8\w5Let's not do that again.\w8\e"
+					"  You've already injured yourself once. \w8\w5Let's not do that again\w2.\w2.\w2.\w8\e"
+				}
  			}
 			elseif reference4 == "Pot" //Like above, put in the name of another collision you set up in surfaces.txt for the secondary character. You can keep adding more elseifs like this for any extra collisions you may have set up.
 			{
@@ -133,6 +178,8 @@ MouseMoveKero
 					"  The pot is already super clean.\w8\e"
 					"  The pot is already sparkly clean.\w8\e"
 					"  The pot is already super sparkly clean.\w8\e"
+					"  The pot is already clean enough.\w8\e"
+					"  The pot does not need further cleaning.\w8\e"
 					"  The pot is already clean and does not need further cleaning.\w8\e"
 					"  The pot is already super clean and does not need further cleaning.\w8\e"
 					"  The pot is already sparkly clean and does not need further cleaning.\w8\e"

@@ -370,6 +370,10 @@ surface11 //. mouth
 {
 	element0,overlay,surface1011.png,0,0
 	
+	collision0,52,34,100,55,Head
+	collision1,48,60,100,85,Face
+	collision2,45,95,100,130,Stomach
+	
 	11interval,random,4
 	11pattern0,-1,10,overlay,0,0
 	11pattern1,1000,50,overlayfast,0,0
@@ -391,6 +395,10 @@ surface11 //. mouth
 surface12 //o mouth
 {
 	element0,overlay,surface1012.png,0,0
+	
+	collision0,52,34,100,55,Head
+	collision1,48,60,100,85,Face
+	collision2,45,95,100,130,Stomach
 	
 	12interval,random,4
 	12pattern0,-1,10,overlay,0,0
@@ -414,6 +422,10 @@ surface13 //pout
 {
 	element0,overlay,surface1013.png,0,0
 	
+	collision0,52,34,100,55,Head
+	collision1,48,60,100,85,Face
+	collision2,45,95,100,130,Stomach
+	
 	13interval,random,4
 	13pattern0,-1,10,overlay,0,0
 	13pattern1,1000,50,overlayfast,0,0
@@ -435,6 +447,10 @@ surface14 //sad
 {
 	element0,overlay,surface1014.png,0,0
 	
+	collision0,52,34,100,55,Head
+	collision1,48,60,100,85,Face
+	collision2,45,95,100,130,Stomach
+	
 	14interval,random,4
 	14pattern0,-1,10,overlay,0,0
 	14pattern1,1000,50,overlayfast,0,0
@@ -455,6 +471,10 @@ surface14 //sad
 surface15 //worried
 {
 	element0,overlay,surface1015.png,0,0
+	
+	collision0,52,34,100,55,Head
+	collision1,48,60,100,85,Face
+	collision2,45,95,100,130,Stomach
 	
 	15interval,random,4
 	15pattern0,-1,10,overlay,0,0
@@ -478,6 +498,10 @@ surface16 //surprised
 {
 	element0,overlay,surface1016.png,0,0
 	
+	collision0,52,34,100,55,Head
+	collision1,48,60,100,85,Face
+	collision2,45,95,100,130,Stomach
+	
 	26interval,always
 	26pattern0,-1,10,move,0,3
 	26pattern1,-1,10,move,0,2
@@ -493,6 +517,10 @@ surface16 //surprised
 surface17 //flustered 
 {
 	element0,overlay,surface1017.png,0,0
+	
+	collision0,52,34,100,55,Head
+	collision1,48,60,100,85,Face
+	collision2,45,95,100,130,Stomach
 	
 	27interval,always
 	27pattern0,-1,10,move,0,3
@@ -510,6 +538,10 @@ surface18 //look down
 {
 	element0,overlay,surface1018.png,0,0
 	
+	collision0,52,34,100,55,Head
+	collision1,48,60,100,85,Face
+	collision2,45,95,100,130,Stomach
+	
 	28interval,always
 	28pattern0,-1,10,move,0,3
 	28pattern1,-1,10,move,0,2
@@ -525,6 +557,10 @@ surface18 //look down
 surface19 //confused
 {
 	element0,overlay,surface1019.png,0,0
+	
+	collision0,52,34,100,55,Head
+	collision1,48,60,100,85,Face
+	collision2,45,95,100,130,Stomach
 	
 	29interval,always
 	29pattern0,-1,10,move,0,3
@@ -542,6 +578,10 @@ surface20 //dumbfounded
 {
 	element0,overlay,surface1020.png,0,0
 	
+	collision0,52,34,100,55,Head
+	collision1,48,60,100,85,Face
+	collision2,45,95,100,130,Stomach
+	
 	30interval,always
 	30pattern0,-1,10,move,0,3
 	30pattern1,-1,10,move,0,2
@@ -558,6 +598,10 @@ surface21 //>~<
 {
 	element0,overlay,surface1021.png,0,0
 	
+	collision0,52,34,100,55,Head
+	collision1,48,60,100,85,Face
+	collision2,45,95,100,130,Stomach
+	
 	41interval,always
 	41pattern0,-1,10,move,0,3
 	41pattern1,-1,10,move,0,2
@@ -573,6 +617,10 @@ surface21 //>~<
 surface22 //owo
 {
 	element0,overlay,surface1022.png,0,0
+	
+	collision0,52,34,100,55,Head
+	collision1,48,60,100,85,Face
+	collision2,45,95,100,130,Stomach
 	
 	32interval,random,4
 	32pattern0,-1,10,overlay,0,0
@@ -591,9 +639,13 @@ surface22 //owo
 	42pattern8,-1,10,move,0,1
 	42pattern9,-1,10,move,0,2
 }
-surface23 //sweatdrop1
+surface23 //>~<
 {
 	element0,overlay,surface1023.png,0,0
+	
+	collision0,52,34,100,55,Head
+	collision1,48,60,100,85,Face
+	collision2,45,95,100,130,Stomach
 	
 	43interval,always
 	43pattern0,-1,10,move,0,3
@@ -607,14 +659,18 @@ surface23 //sweatdrop1
 	43pattern8,-1,10,move,0,1
 	43pattern9,-1,10,move,0,2
 }
-surface24 //sweatdrop2
+surface24 //sweatdrop
 {
+	element0,overlay,surface1024.png,0,0
+	
 	34interval,random,4
 	34pattern0,-1,10,overlay,0,0
 	34pattern1,1000,50,overlayfast,0,0
 	34pattern3,-1,3,overlay,0,0
 	
-	element0,overlay,surface1024.png,0,0
+	collision0,52,34,100,55,Head
+	collision1,48,60,100,85,Face
+	collision2,45,95,100,130,Stomach
 	
 	44interval,always
 	44pattern0,-1,10,move,0,3
@@ -630,7 +686,11 @@ surface24 //sweatdrop2
 }
 surface25 //closed eyed smile
 {
-	element0,overlay,surface25.png,0,0
+	element0,overlay,surface1025.png,0,0
+	
+	collision0,52,34,100,55,Head
+	collision1,48,60,100,85,Face
+	collision2,45,95,100,130,Stomach
 	
 	45interval,always
 	45pattern0,-1,10,move,0,3
@@ -646,12 +706,16 @@ surface25 //closed eyed smile
 }
 surface26 //smile
 {
+	element0,overlay,surface1026.png,0,0
+	
 	36interval,random,4
 	36pattern0,-1,10,overlay,0,0
 	36pattern1,1000,50,overlayfast,0,0
 	36pattern3,-1,3,overlay,0,0
 	
-	element0,overlay,surface1026.png,0,0
+	collision0,52,34,100,55,Head
+	collision1,48,60,100,85,Face
+	collision2,45,95,100,130,Stomach
 	
 	46interval,always
 	46pattern0,-1,10,move,0,3
@@ -669,6 +733,10 @@ surface27 //panicking
 {
 	element0,overlay,surface1017.png,0,0
 	
+	collision0,52,34,100,55,Head
+	collision1,48,60,100,85,Face
+	collision2,45,95,100,130,Stomach
+	
 	47interval,always
 	47pattern0,-1,7,move,3,0
 	47pattern1,-1,7,move,-3,0
@@ -684,6 +752,10 @@ surface27 //panicking
 surface28 //innocent-looking
 {
 	element0,overlay,surface1025.png,0,0
+	
+	collision0,52,34,100,55,Head
+	collision1,48,60,100,85,Face
+	collision2,45,95,100,130,Stomach
  
 	38interval,runonce
 	38pattern0,-1,0,overlay,0,0
@@ -718,6 +790,9 @@ surface90
 {
 	element0,overlay,surface10.png,0,0
 	
+	collision0,60,75,88,110,Thorns
+	collision1,60,112,92,140,Pot
+	
 	90interval,runonce
 	90pattern0,-1,0,overlay,0,0
 	90pattern1,1901,5,overlay,0,0
@@ -729,6 +804,9 @@ surface90
 surface91
 {
 	element0,overlay,surface10.png,0,0
+	
+	collision0,60,75,88,110,Thorns
+	collision1,60,112,92,140,Pot
 	
 	91interval,runonce
 	91pattern0,-1,0,overlay,0,0
@@ -743,6 +821,9 @@ surface91
 surface92
 {
 	element0,overlay,surface10.png,0,0
+
+	collision0,60,75,88,110,Thorns
+	collision1,60,112,92,140,Pot
 	
 	92interval,runonce
 	92pattern0,-1,0,overlay,0,0
@@ -757,6 +838,9 @@ surface92
 surface93
 {
 	element0,overlay,surface10.png,0,0
+
+	collision0,60,75,88,110,Thorns
+	collision1,60,112,92,140,Pot
 	
 	93interval,runonce
 	93pattern0,-1,0,overlay,0,0
@@ -774,6 +858,26 @@ surface93
 	93pattern12,1911,10,overlay,0,0
 	93pattern13,1910,10,overlay,0,0
 	93pattern14,-1,10,overlay,0,0
+}
+
+surface94
+{
+	element0,overlay,surface10.png,0,0
+	
+	collision0,60,75,88,110,Thorns
+	collision1,60,112,92,140,Pot
+	
+	94interval,runonce
+	94pattern0,-1,0,overlay,0,0
+	94pattern1,1923,5,overlay,0,0
+	94pattern2,1924,6,overlay,0,0
+	94pattern3,1925,8,overlay,0,0
+	94pattern4,1926,10,overlay,0,0
+	94pattern5,1927,15,overlay,0,0
+	94pattern6,1925,250,overlay,0,0
+	94pattern7,1924,5,overlay,0,0
+	94pattern8,1910,10,overlay,0,0
+	94pattern9,-1,5,overlay,0,0
 }
 
 //And that's it for Triangle's default pose! Now we can move on. Like with the main character poses above, all we have to do for the following surfaces is make sure they're pointing at the right file number!
