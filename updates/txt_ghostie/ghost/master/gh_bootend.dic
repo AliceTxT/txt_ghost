@@ -6,16 +6,21 @@ OnFirstBoot
  	lastTalk = "" //This is part of how chained conversations work (see aitalk.dic).
 	passmin = 0 
 	passsec = 0 // These two keep track of the time.
- 	username         = "USER" //This sets a temporary name for the user. It'll be replaced when they tell the ghost their name.
-	stroke           = 0	  // Sets their being-pet state to zero.
- 	teachusername    = 0	  // Related to them learning your name.
-	mikireflag       = 0	  // Determines behavior at certain points.
- 	aitalkinterval = 400      //Their default talk rate.
-	presuffix = "unknown"     //Their pronouns
- 	birthdayprint = "????"    //A temporary value for the user's birthday.
-	talktime = "5 minutes"    //How the value aitalkinterval will display in the config menu.
-	deleteshitai = "OFF"      //Sets whether or not the user can uninstall the ghost to "OFF".
-	nowshell = "default"      //This is for a special if check in aitalk.dic to see what shell the ghost is using. You should use the name of your default shell folder here.
+ 	username         = "USER"  //This sets a temporary name for the user. It'll be replaced when they tell the ghost their name.
+	stroke           = 0	   // Sets their being-pet state to zero.
+ 	teachusername    = 0	   // Related to them learning your name.
+	mikireflag       = 0	   // Determines behavior at certain points.
+ 	aitalkinterval = 400       //Their default talk rate.
+	presuffix = "unknown"      //Their pronouns
+ 	birthdayprint = "????"     //A temporary value for the user's birthday.
+	talktime = "5 minutes"     //How the value aitalkinterval will display in the config menu.
+	deleteshitai = "OFF"       //Sets whether or not the user can uninstall the ghost to "OFF".
+	nowshell = "default"       //This is for a special if check in aitalk.dic to see what shell the ghost is using. You should use the name of your default shell folder here.
+	LunchMentioned = "FALSE"   //If Lunch came up in conversation
+	DinnerMentioned = "FALSE"  //If Dinner came up in conversation
+	WaterCactie = "FALSE"
+	AdmireCactie = "FALSE"
+	CactieNameKnow = "FALSE"
 	
 	if reference0 == 0 
  	{
@@ -138,6 +143,11 @@ OnBoot
 	lastTalk = "" 
 	passmin = 0
 	passsec = 0
+	LunchMentioned = "FALSE"
+	DinnerMentioned = "FALSE"
+	WaterCactie = "FALSE"
+	AdmireCactie = "FALSE"
+	
 	
  	"\0\s[0]\1\s[10]" //Sets them up in their neutral pose.
 	
@@ -245,15 +255,72 @@ normalboottalk
 		}
 		elseif timeslot == "lunch"
 		{
-
+			//noexp
+			//"It's lunchtime! Have you eaten yet, %(username)?"
+			"\s[0]\b[0]  It's lunchtime!\w8\w8\n\n[half]/
+			Have you eaten yet,\w4 %(username)?\w8\w8\n\n[half]/
+			\![*]\q[Yes,choicelunchyes]\n/
+			\![*]\q[No,choicelunchno]"
+			//"Good afternoon!"
+			"\s[0]\b[0]  Good afternoon!\w8\e"
+			//"Good afternoon and happy lunching!"
+			"\s[0]\b[0]  Good afternoon and happy lunching!\w8\e"
+			//"Hello and happy lunching!"
+			"\s[0]\b[0]  Hello and happy lunching!\w8\e"
+			//"It's lunchtime, %(username)! Remember to eat!"
+			"\s[0]\b[0]  It's lunchtime,\w3 %(username)! \w8\w8\n\n[half]/
+			Remember to eat!\w8\e"
+			
 		}
 		elseif timeslot == "afternoon"
 		{
-
+			//noexp
+			//nobal
+			//"It's the afternoon~"
+			"\s[0]\b[0]  It's the afternoon~"
+			//"Good afternoon!"
+			"\s[0]\b[0]  Good afternoon!"
+			//"It's afternoon... Have you eaten lunch, User?"
+			"\s[0]\b[0]  It's afternoon!/
+			Have you eaten lunch, User?"
+			//"Good afternoon, User! How was lunch?"
+			"\s[0]\b[0]  Good afternoon,\w3 %(username)!\w8\w2\n\n[half]/
+			How was lunch?\w8\w5\n\n[half]/
+			\![*]\q[It was good,choiceafternoonlunchgood]\n/
+			\![*]\q[It was bad,choiceafternoonlunchbad]\n/
+			\![*]\q[I haven't had lunch...,choiceafternoonlunchno]"
 		}
 		elseif timeslot == "evening"
 		{
-
+			"\b[0]"
+			"\b[1]"
+			"\b[2]"
+			"\b[3]"
+			"\b[4]"
+			"\b[5]"
+			"\b[6]"
+			"\b[8]"
+			--
+			//noexp
+			//"Good evening!"
+			"\s[0]  Good evening!\w8\e"
+			//"It's evening!"
+			"\s[0]  It's evening!\w8\e"
+			//"It's the evening! What you up to?"
+			"\s[0]  It's the evening! What you up to?\w8\e"
+			//"Hello and good evening~"
+			"\s[0]  Hello and good evening~\w8\e"
+			//"It's evening! Are you gonna get dinner later?"
+			"\s[0]  It's evening! Are you gonna get dinner later?\n\n[half]\w8\w8/
+			\![*]\q[Yes,choiceeveningdinneryes]\n/
+			\![*]\q[No,choiceeveningdinnerno]\n/
+			\![*]\q[I've already eaten,choiceeveningdinneralready]"
+			//"Good evening~ Are you gonna get dinner soon, %(username)?"
+			"\s[0]  Good evening~\n\n[half]\w8\w8/
+			\s[0]Are you gonna get dinner soon,\w3 %(username)?\w8\w8\w8\n\n[half]/
+			\![*]\q[Yes,choiceeveningdinneryes]\n/
+			\![*]\q[No,choiceeveningdinnerno]\n/
+			\![*]\q[I've already eaten,choiceeveningdinneralready]"
 		}
 		elseif timeslot == "latenight"
 		{
@@ -266,6 +333,7 @@ normalboottalk
 	}
 }
 
+//--Morning--User had a good sleep
 Select.choicegoodsleep
 {
 	//noexp
@@ -275,6 +343,7 @@ Select.choicegoodsleep
 	"\s[0]\b[6] That's good.\e"
 	"\s[0]\b[8] That's good.\e"
 }
+//--Morning--User had bad sleep
 Select.choicebadsleep
 {
 	//noexp
@@ -287,6 +356,7 @@ Select.choicebadsleep
 	"\s[0]\b[5] Aww\w2.\w2.\w2.\w8 That's a shame\w2.\w2.\w2.\w2\w8\e"
 	"\s[0]\b[6] Aww\w2.\w2.\w2.\w8 That's a shame\w2.\w2.\w2.\w2\w8\e"
 }
+//--Morning--User is having a good morning
 Select.choicemorninggood
 {
 	//noexp
@@ -314,6 +384,7 @@ Select.choicemorninggood
 	//"A good start to your day then! That's nice."
 	"\s[0]  A good start to your day then! \w8That's nice.\w8\e"
 }
+//--Morning--User is having a bad morning
 Select.choicemorningbad
 {
 	"\b[0]"
@@ -347,6 +418,7 @@ Select.choicemorningbad
 	"\s[0]  Oh\w2.\w2.\w2.\w8\w3\n\n[half]/
 	\s[0]I hope you'll cheer up soon\w2.\w2.\w2.\w8\e"
 }
+//--Morning--User had breakfast
 Select.choicebreakfastyes
 {	
 	if RAND(100) <= 10
@@ -375,7 +447,7 @@ Select.choicebreakfastyes
 		"Glad to hear you're taking care of yourself, %(username)."
 	}
 } 
-
+//--Morning--User is explained what they had for breakfast
 inputuserbreakfast
 {
 	//noexp
@@ -399,6 +471,7 @@ inputuserbreakfast
 	\![*]\q[Yes,choicebreakfastenjoy]\n/
 	\![*]\q[No,choicebreakfastnotenjoy]"
 }
+//--Morning--User enjoyed breakfast
 Select.choicebreakfastenjoy
 {
 	"\b[3]"
@@ -410,7 +483,7 @@ Select.choicebreakfastenjoy
 	"\s[0]  That's good!\w8\e"
 	"\s[0]  Yay~\w8\e"
 }
-
+//--Morning--User did not enjoy breakfast
 Select.choicebreakfastnotenjoy
 {
 	"\b[5]"
@@ -424,7 +497,7 @@ Select.choicebreakfastnotenjoy
 	"\s[0]  Oh\w2.\w2.\w2.\w8\n\n[half]/
 	\s[0]Hopefully lunch will be better\w2.\w2.\w2.\w2?\w8\e"
 }
-
+//--Morning--User did not have breakfast
 Select.choicebreakfastno
 {
 	if RAND(100) <= 40
@@ -448,7 +521,7 @@ Select.choicebreakfastno
 		"\s[0]  Aww\w2.\w2.\w2.\w2\w8 I hope you get something to eat soon.\8\e"
 	}
 }	
-
+//--Morning--User has not had breakfast but will
 Select.choicebreakfastnobutwill
 {
 	"\b[1]"
@@ -460,6 +533,7 @@ Select.choicebreakfastnobutwill
 	"\s[0]  Ok!"
 	"\s[0]  Good!"
 }
+//--Morning--User has not had breakfast and won't
 Select.choicebreakfastnoandwont
 {
 	"\b[3]"
@@ -471,6 +545,201 @@ Select.choicebreakfastnoandwont
 	"\s[0]  Oh, okay..."
 	"\s[0]  Oh..."
 	"\s[0]  Oh... Sorry for bothering you then..."
+}
+//--Lunch--User has eaten lunch
+Select.choicelunchyes
+{
+	"\b[4]"
+	"\b[5]"
+	"\b[6]"
+	"\b[8]"
+	"\b[0]"
+	--
+	//noexp
+	//"Good!"
+	"\s[0]  Good!"
+	//"That's good."
+	"\s[0]  That's good."
+	//"Yay~"
+	"\s[0]  Yay~"
+}
+//--Lunch--User has not eaten lunch
+Select.choicelunchno
+{
+	//noexp
+	//nobal
+	//"Well then you should! You need to eat, %(username)!"
+	"\s[0]\b[0]  Well then you should!\n\n[half]/
+	\s[0]You need to eat,\w2 %(username)!"
+	//"You should probably go do that... Skipping meals isn't good for you..."
+	"\s[0]\b[0]  You should probably go do that\w1.\w1.\w1.\w8/
+	Skipping meals isn't good for you\w1.\w1.\w1.\w8\e"
+	//"You should probably go do that... Skipping lunch probably isn't good for you..."
+	"\s[0]\b[0]  You should probably go do that\w1.\w1.\w1.\w8\w5/
+	Skipping lunch probably isn't good for you\w1.\w1.\w1.\w8\e"
+	//"Aww... I hope you get something to eat soon."
+	"\s[0]\b[0]  Aww\w1.\w1.\w1.\w8\w8\n\n[half]/
+	\s[0]I hope you get something to eat soon.\w8\e"
+	//"Oh... I hope you go and get lunch soon?"
+	"\s[0]\b[0]  Oh\w1.\w1.\w1.\w8\w5 I hope you go and get lunch soon?\w8\n\n[half]/
+	\![*]\q[I will,choicelunchnobutwill]\n/
+	\![*]\q[I probably won't,choicelunchnoandwont]"
+}
+//Lunch--User has not eaten lunch but will
+Select.choicelunchnobutwill
+{
+	//noexp
+	//nobal
+	//"Ok!"
+	"\s[0]\b[0]  Ok!"
+	--
+	LunchMentioned = "TRUE"
+}
+//Lunch--User has not eaten lunch and won't
+Select.choicelunchnoandwont
+{
+	//noexp
+	//nobal
+	//"Oh, okay..."
+	"\s[0]\b[0]  Oh,\w8 okay\w1.\w1.\w1.\w8\e"
+	//"Oh..."
+	"\s[0]\b[0]  Oh\w1.\w1.\w1.\w8\e"
+	//"Oh... Sorry for bothering you then..."
+	"\s[0]\b[0]  Oh\w1.\w1.\w1.\w8 Sorry for bothering you then\w1.\w1.\w1.\w8\e"
+}
+//--Afternoon--User's lunch was good
+Select.choiceafternoonlunchgood
+{
+	"\b[0]"
+	"\b[1]"
+	"\b[2]"
+	"\b[3]"
+	"\b[4]"
+	"\b[5]"
+	"\b[6]"
+	"\b[8]"
+	--
+	//noexp
+	//"Glad to hear it!"
+	"\s[0]  Glad to hear it!"
+	//"That's good!"
+	"\s[0]  That's good!"
+	//"Oh! What'd you have?"
+	"\s[0]  Oh! \w8What'd you have?\w8\w8\w8/
+	\![open,inputbox,inputuserlunch,-1]"
+}
+//--Afternoon--User's lunch was bad
+Select.choiceafternoonlunchbad
+{
+	"\b[0]"
+	"\b[1]"
+	"\b[2]"
+	"\b[3]"
+	"\b[4]"
+	"\b[5]"
+	"\b[6]"
+	"\b[8]"
+	--
+	//noexp
+	//"Aww... That's a shame..."
+	"\s[0]  Aww\w1.\w1.\w1.\w8 /
+	\s[0]That's a shame\w1.\w1.\w1.\w8\e"
+	//"Oh... That's a shame..."
+	"\s[0]  Oh\w1.\w1.\w1.\w8 /
+	\s[0]That's a shame\w1.\w1.\w1.\w8\e"
+	//"Oh... Bummer..."
+	"\s[0]  Oh\w1.\w1.\w1.\w8 /
+	\s[0]Bummer\w1.\w1.\w8\e."
+	//"Aww.... Hopefully dinner will be better?"
+	"\s[0]  Aww\w1.\w1.\w1.\w8 /
+	\s[0]Hopefully dinner will be better?"
+}
+//--Afternoon--User did not have lunch
+Select.choiceafternoonlunchno
+{
+	//"Aww... That's not good..."
+	"\s[0]  Aww\w1.\w1.\w1.\w8 /
+	That's not good\w1.\w1.\w1.\w8\e"
+	//"What?! You can't just skip lunch, User!"
+	"\s[0]  \f[height,22]What?!\f[height,16]\w8\w8\n\n[half]/
+	You can't just skip lunch, \w2%(username)!\w8\e"
+	//"Preposterous! You shouldn't skip lunch, User..."
+	"\s[0]  \f[height,22]Preposterous!\f[height,16]\w8\w8\n\n[half]/
+	You shouldn't skip lunch,\w3 %(username)\w1.\w1.\w1.\w8\e"
+	//"What?! You can't just skip lunch!"
+	"\s[0]  \f[height,22]What?!\f[height,18]\w8\w8\n\n[half]/
+	You can't just skip lunch!\f[height,16]\w8\e"
+	//"What?! You shouldn't skip meals, User!"
+	"\s[0]  \f[height,22]What?!\f[height,18]\w8\w8\n\n[half]/
+	You shouldn't skip meals, \w3%(username)!\w8\e"
+	//"But you shouldn't skip meals..."
+	"\s[0]  But you shouldn't skip meals\w1.\w1.\w1.\w8\e"
+}
+//--Afternoon--After User explains what they had for lunch
+inputuserlunch
+{
+	"\b[0]"
+	"\b[1]"
+	"\b[2]"
+	"\b[3]"
+	"\b[4]"
+	"\b[5]"
+	"\b[6]"
+	"\b[8]"
+	--
+	//noexp
+	//"That sounds pretty tasty."
+	"\s[0]  That sounds pretty tasty."
+	//"That sounds nice... wish I could have some..."
+	"\s[0]  That sounds nice\w1.\w1.\w1.\w2\w8 /
+	wish I could have some\w1.\w1.\w1.\w8\e"
+	//"That sounds super yummy..."
+	"\s[0]  That sounds super yummy\w1.\w1.\w1.\w8\e"
+	//"That sounds nice."
+	"\s[0]  That sounds nice.\w8\e"
+	//"That sounds good..."
+	"\s[0]  That sounds good\w1.\w1.\w1.\w8\e"
+	//"That sounds nice... I'm glad you had a good lunch, User."
+	"That sounds nice\w1.\w1.\w1.\w8\n\n[half]/
+	I'm glad you had a good lunch, %(username).\w8\e"
+}
+
+Select.choiceeveningdinneryes
+{
+	DinnerMentioned = "TRUE"
+	--
+	//noexp
+	//"That's good~"
+	"\s[0]  That's good~\w8\e"
+	//"Okie! Enjoy your dinner later!"
+	"\s[0]  Okie!\w8\w5 /
+	\s[0]Enjoy your dinner later!\w8\e"
+	//"Alright! Have a good dinner later!"
+	"\s[0]  Alright!\w8\w5 /
+	\s[0]Have a good dinner later!\w8\e"
+	//"Good! I hope you enjoy your dinner later."
+	"\s[0]  Good!\w8\w5 /
+	\s[0]I hope you enjoy your dinner later.\w8\e"
+	//"Oh! What are you gonna get?"
+	"\s[0]  Oh!\w8\w2 /
+	\s[0]What are you gonna get?\w8\w8/
+	\![open,input,inputuserdinner,-1]"
+	//"That's good. What are you getting for dinner?"
+	"\s[0]  That's good.\w8\w5 /
+	\s[0]What are you getting for dinner?/
+	\![open,input,inputuserdinner,-1]"
+}
+
+inputuserdinner 
+{
+	DinnerMentioned = "TRUE"
+	--
+	//"Sounds good!"
+	"\s[0]  Sounds good!\w8\e"
+	//"Okay~ Enjoy your dinner later!"
+	"\s[0]  Okay~ Enjoy your dinner later!\w8\e"
+	//"Sounds nice! Enjoy your dinner later, then!"
+	"\s[0]  Sounds nice!\w8\w8 Enjoy your dinner later,\w2 then!\w8\e"
 }
 
 OnClose
@@ -487,64 +756,82 @@ OnClose
 			{
 			if timeslot == "earlymorning"
 				{
-					"\1\s[10]This is an early morning close dialogue.\w8\0\s[0]From 5 to 8.\w8"
 					
-					"\0\s[0]This is another early morning close dialogue.\w8\1\s[10]Yup.\w8\w8"
 				}
 			elseif timeslot == "morning"
  				{
- 					"\0\s[0]This is a morning close dialogue.\w8\w8"
+ 					
  				}
  			elseif timeslot == "lunch"
  				{
- 					"\0\s[0]This is a lunch close dialogue.\w8\1\s[10]Yup.\w8"
-					
- 					"\0\s[0]This is another lunch close dialogue.\w8\1\s[10]In the middle of the day.\w8"
+					if LunchMentioned == "TRUE"
+					{
+						//"Have a good lunch later, %(username)!"
+						"\s[0]  Have a good lunch later,\w2 %(username)!/
+						Bye bye!\w8\e"
+						//"Enjoy your lunch later, %(username)!"
+						"\s[0]  Enjoy your lunch later,\w2 %(username)!\w3/
+						\w2B\w2y\w2e\w2e\w2e\w2e\w2e\w2!\w8\e"
+					}
+					else
+					{
+					}
  				}
  			elseif timeslot == "afternoon"
  				{
- 					"\0\s[0]This is an afternoon close dialogue.\w8\1\s[10]Done.\w8"
-					
- 					"\1\s[10]This is another afternoon close dialogue.\w8\0\s[0]Yup.\w8"
+					if DinnerMentioned == "TRUE"
+					{
+						"\b[0]"
+						"\b[1]"
+						"\b[2]"
+						"\b[3]"
+						"\b[4]"
+						"\b[5]"
+						"\b[6]"
+						"\b[8]"
+						--
+						//noexp
+						//"Have a good dinner later, %(username)!"
+						"\s[0]  Have a good dinner later,\w3 %(username)!"
+						//"I hope you enjoy dinner later, %(username)!"
+						"\s[0]  I hope you enjoy dinner later,\w3 %(username)!"
+						//"Enjoy your dinner later, %(username)!"
+						"\s[0]  Enjoy your dinner later,\w3 %(username)!"
+					}
+					else
+					{
+						
+					}
  				}
   			elseif timeslot == "evening"
  				{
- 						if weekday == 6 //here, a nested if statement is checking that if it's evening, is it also saturday? You can do this to check more specific times on other days as well. You can change this to some other day if you want, or just delete this little if/else section entirely and write your own evening related close dialogue.
- 						{
- 							"\0\s[0]This is a Saturday evening close dialogue.\w8\1\s[10]Somewhat specific.\w8"
- 						}
- 						else //if it's not saturday, then it'll do this dialogue instead.
- 						{
- 							"\0\s[0]This is an evening close dialogue.\w8\1\s[10]Bye.\w8"
-							
- 							"\1\s[10]This is another evening close dialogue.\w8\0\s[0]Yup.\w8"
- 						}
+					if DinnerMentioned == "TRUE"
+					{
+						"\b[0]"
+						"\b[1]"
+						"\b[2]"
+						"\b[3]"
+						"\b[4]"
+						"\b[5]"
+						"\b[6]"
+						"\b[8]"
+						--
+						//noexp
+						//"Have a good dinner later, %(username)!"
+						"\s[0]  Have a good dinner later,\w3 %(username)!"
+						//"I hope you enjoy dinner later, %(username)!"
+						"\s[0]  I hope you enjoy dinner later,\w3 %(username)!"
+						//"Enjoy your dinner later, %(username)!"
+						"\s[0]  Enjoy your dinner later,\w3 %(username)!"
+					}
+					else
+					{
+						
+					}
  				}
 			elseif timeslot == "latenight"
 			 	{
- 						if weekday == 6 //This is the same check as above to see if it's Saturday. Note that this doesn't have an else statement! Sometimes you can get away with that, but make sure you test thoroughly.
-						//Of course, you can also cut this check entirely if you want.
- 						{
- 							"\0\s[0]This is a late Saturday night close dialogue.\w8"
-							
- 							"\1\s[10]This is another late Saturday night close dialogue.\w8\0\s[0]Yup.\w8"
- 						}
-						
- 						"\1\s[10]This is a late night close dialogue.\w8\0\s[0]That it is.\w8"
-						
-						"\0\s[0]This is another late night close dialogue.\w8\1\s[10]Done.\w8"
- 				}
-			else //like above, this is the midnight time slot since it's the last one left.
- 				{
- 						if weekday == 0 //checking if it's the middle of the night on Sunday
- 						{
- 							"\1\s[10]This is a middle of the night Sunday close dialogue.\w8\0\s[0]From midnight to five AM on Sunday.\w8"
- 						}
-						"\0\s[0]This is a middle of the night close dialogue.\w8\1\s[10]Very late at night.\w8"
-						
-						"\1\s[10]This is another middle of the night close dialogue.\w8"
-						
-						"\1\s[10]This is the third middle of the night close dialogue.\w8\0\s[0]So it is.\w8"
+
 				}
 			}
 				
@@ -553,9 +840,7 @@ OnClose
  		
  	else //This dialogue is for if they haven't been open for at least five minutes.
  	{
- 		"\0\s[0]This dialogue is for closing us before five minutes have passed.\w8\w8"
 		
- 		"\1\s[10]This is another bit of dialogue for closing us before five minutes have passed.\w8\0\s[0]Quickly done.\w8\w8"
  	}
  	--
 	"\-\e" //this bit of code actually closes and ends the ghost. Because \e is here, you don't have to end each line above with it. Again, this will come up very rarely, so OnClose is an unusual case.
@@ -598,21 +883,21 @@ OnGhostChanging
 
 
 //--OnGhostChanged
-
-//A sister to the above, this runs after the ghost has either reloaded itself, or when you switch from another ghost to this ghost.
-
 OnGhostChanged
 {
 	"\0\s[0]\1\s[10]" //this sets up their default poses
 	--
-	if reference0 == "Girl" //As above, this should be the name of your ghost as in install.txt or descript.txt.
+	if reference0 == "Ghostie" //As above, this should be the name of your ghost as in install.txt or descript.txt.
 	{
 		"\0\s[0]We have reloaded ourselves.\1\w8\s[10]Sure have.\e"
 	}
 	else //If you're switching to them from another ghost...
 	{
-		"\1\s[10]Goodbye, %(reference0).\w8\0\s[0]Someone switched from you to us.\e"
-
+		//noexp
+		//nobal
+		"\s[0]\b[0]  Bye bye, %(reference0)!\w8\w8\w8\w2\n\n[half]/
+		\s[0]Hello,\w2 %(username)!\w8\w3\n\n[half]/
+		\s[0]I see you switched %(reference0) out for us."
 		//Again, %(reference0) in this function is the name of the ghost in question. As above, replace these two lines of dialogue what what'd be appropriate for your ghost.
 	}
 }
@@ -626,16 +911,11 @@ OnShellChanging
  {
 	if reference0 == "Hypothetical Shell that doesn't actually exist" //reference0 in OnShellChanging is the name of the shell you're swapping to. It should be defined in the descript.txt file in your shell folder. If you do have alternate shells, put in the right name here.
 	{
-	"\1\s[10]This dialogue is specifically for changing to this particular shell.\w8\0\w8\s[9]It totally exists.\w8\e"
-	//Then rewrite this line as appropriate.
+
 	}
 	else //if you don't have any specific dialogue for a specific shell
 	{
-	"\0\s[0]This dialogue is for changing shells.\w8\1\s[10]Sure is.\w8\e"
 	
-	"\1\s[10]This is another bit of dialogue for changing shells.\w8\0\s[8]I wonder how many people will actually have multiple shells?\e"
-	
-	//Rewrite these two lines as you need.
 	}
  }
  
@@ -650,8 +930,6 @@ OnShellChanged
  	{
  		nowshell = "default" //This is the folder name for your shell. Not the same as the above! 
 		
- 		"\0\s[0]This dialogue is for switching to our default shell.\w8\1\s[18]No really, will anyone actually put in the work to use these functions?\w8\0\s[9]\n\n[half]Shh.\e"
-		//Replace dialogue as required.
  	}
  	elseif reference0 == "Hypothetical Shell that doesn't actually exist" //You can use as many elseifs for as many shells as you've got.
  	{

@@ -8,7 +8,7 @@
 //Note also here that lines do not end with \e here. This is because the ghost isn't speaking these lines, they're just being used in the code.
 
 
-//---- Username -----------------------------------------------------------------------
+//---- Username 
 //Don't touch this.
 
 On_username
@@ -19,7 +19,7 @@ On_username
 //--- Network Update URL 
 On_homeurl
 {
-	"https://github.com/AliceTxT/txt_ghost-ghostie.git?raw=true"
+	"https://github.com/AliceTxT/txt_ghost/tree/main/updates/txt_ghostie"
 }
 
 

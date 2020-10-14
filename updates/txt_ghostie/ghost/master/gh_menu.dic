@@ -664,45 +664,105 @@ OpenKeroMenu
 
 Select.cactiewater
 {
-	"\1\s[90]\b[0]"
-	"\1\s[90]\b[1]"
-	"\1\s[90]\b[2]"
-	"\1\s[90]\b[3]"
-	"\1\s[90]\b[4]"
-	"\1\s[90]\b[5]"
-	"\1\s[90]\b[6]"
-	"\1\s[90]\b[8]"
-	--
-	"  You watered the cactus."
-	"  You watered the potted cactus."
-	"  You watered the cute little cactus."
-	"  You watered the cute potted cactus."
+	if WaterCactie == "FALSE"
+	{
+		"\1\s[90]\b[0]"
+		"\1\s[90]\b[1]"
+		"\1\s[90]\b[2]"
+		"\1\s[90]\b[3]"
+		"\1\s[90]\b[4]"
+		"\1\s[90]\b[5]"
+		"\1\s[90]\b[6]"
+		"\1\s[90]\b[8]"
+		--
+		"  You watered the cactus.\w8\e"
+		"  You watered the plant.\w8\e"
+		"  You watered the cute little potted cactus.\w8\e"
+		"  You watered the potted cactus.\w8\e"
+		"  You watered the potted plant.\w8\e"
+		"  You watered the cute little cactus.\w8\e"
+		"  You watered the cute potted cactus.\w8\e"
+		"  You watered the cute potted plant.\w8\e"
+		"  You watered the cute little plant.\w8\e"
+		--
+		WaterCactie = "TRUE"
+	}
+	else
+	{
+		"\1\s[10]\b[0]"
+		"\1\s[10]\b[1]"
+		"\1\s[10]\b[2]"
+		"\1\s[10]\b[3]"
+		"\1\s[10]\b[4]"
+		"\1\s[10]\b[5]"
+		"\1\s[10]\b[6]"
+		"\1\s[10]\b[8]"
+		--
+		"  The cactus has already been watered today.\w8\e"
+		"  The plant has already been watered today.\w8\e"
+		"  The potted plant has already been watered today\w8\e."
+		"  The potted cactus has already been watered today.\w8\e"
+		"  The cute potted cactus has already been watered today.\w8\e"
+		"  The cute cactus has already been watered today.\w8\e"
+		"  The cute plant has already been watered today.\w8\e"
+	}
 }
 
 Select.cactieadmire
 {
-	"\1\s[91]"
-	"\1\s[92]"
-	--
-	"\b[0]"
-	"\b[1]"
-	"\b[2]"
-	"\b[3]"
-	"\b[4]"
-	"\b[5]"
-	"\b[6]"
-	"\b[8]"
-	--
-	"  You admired the cactus."
-	"  You admired the cactus' thorns."
-	"  You admired the potted cactus."
-	"  You admired the cute little cactus."
-	"  You admired the cute little potted cactus."
-	"  You stared at the cactus."
-	"  You stared at the cute little cactus."
-	"  You stared at the potted cactus."
-	"  You stared at the cute potted cactus."
-	"  You stared at the cute little potted cactus."
+	if AdmireCactie == "FALSE"
+	{
+		"\1\s[91]"
+		"\1\s[92]"
+		--
+		"\b[0]"
+		"\b[1]"
+		"\b[2]"
+		"\b[3]"
+		"\b[4]"
+		"\b[5]"
+		"\b[6]"
+		"\b[8]"
+		--
+		"  You admired the cactus."
+		"  You admired the cactus' thorns."
+		"  You admired the potted cactus."
+		"  You admired the cute little cactus."
+		"  You admired the cute little potted cactus."
+		"  You stared at the cactus."
+		"  You stared at the cute little cactus."
+		"  You stared at the potted cactus."
+		"  You stared at the cute potted cactus."
+		"  You stared at the cute little potted cactus."
+		--
+		AdmireCactie = "TRUE"
+	}
+	else
+	{
+		"\1\s[10]"
+		--
+		"\b[0]"
+		"\b[1]"
+		"\b[2]"
+		"\b[3]"
+		"\b[4]"
+		"\b[5]"
+		"\b[6]"
+		"\b[8]"
+		--
+		"  You've already admired the cactus today."
+		"  You've already admired the plant today."
+		"  You've already admired the potted cactus today."
+		"  You've already admired the potted plant today."
+		"  You've already admired the cute potted plant today."
+		"  You've already admired the cute potted cactus today."
+		"  You've already admired the cute little plant today."
+		"  You've already admired the cute little cactus today."
+		"  You've already admired the little plant today."
+		"  You've already admired the little cactus today."
+		"  You've already admired the cute little potted plant today."
+		"  You've already admired the cute little potted cactus today."
+	}
 }
 
 Select.cactietalk

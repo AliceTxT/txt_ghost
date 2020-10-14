@@ -1,3 +1,15 @@
---Readme--
+--- READ ME ---
 
-This is the readme for your ghost. I would highly recommend writing your own readme file in here. Information you might want to include would be your name, your site, the characters you're using, features they may have, places you can be contacted, hotkeys they have set, what kind of conversations they have, or anything else like that that you think your user might like to know.
+Welcome to Cute lil' Ghostie (and his pet cactus)!
+I'm sure you guys will get along!
+
+Interact with the Ghostie and talk to his pet cactus!
+
+Press "T" to make the Ghostie talk;
+Press "R" to repeat the Ghostie's last dialogue;
+and press "F1" to pull up this message again.
+
+Have fun~ 
+(and remember to water the potted cactus!)
+
+Happy Halloweeen!
