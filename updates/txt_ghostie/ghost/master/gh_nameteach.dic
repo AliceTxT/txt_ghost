@@ -157,5 +157,5 @@ Select.titlesunbae
 NameDone
 {
 	//noexp
-	"\0\s[0] Ok!\w7 \s[0]I will now call you %(username).\e"
+	"\0\s[21] Ok!\w8\w2 \s[26]I will call you %(username).\e"
 }

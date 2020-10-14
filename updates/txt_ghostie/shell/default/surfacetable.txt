@@ -8,10 +8,24 @@ scope,0
 
 0,Normal
 10,Cactie
-11,Smile
-12,Dot mouth
-13,O mouth
-14,Pout
+11,. mouth
+12,o mouth
+13,Pout
+14,Sad
+15,Worried
+16,Surprised
+17,Fustered
+18,Looking down
+19,Confused
+20,Dumbfounded
+21,>w<
+22,owo
+23,>~<
+24,sweatdrop
+25,closed eyed smile
+26,smile
+27,panicking
+28,innocent-looking
 }
 
 groupB

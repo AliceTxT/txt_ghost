@@ -1,0 +1,9 @@
+Charset,UTF-8
+install,641437263
+homeurl_found,1
+surfacecount,43
+homeurl,https://AliceTxT.github.io/txt_ghost/updates/txt_ghostie/
+update_result,OK(0)
+firstboot,641437336
+commitmemorysize,475967
+lastboot,655978675

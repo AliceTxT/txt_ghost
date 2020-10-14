@@ -366,7 +366,7 @@ element0,overlay,surface10.png,0,0
 //4pattern1,-1,10,overlay,0,0
 }
 
-surface11 //smile
+surface11 //. mouth
 {
 	element0,overlay,surface1011.png,0,0
 	
@@ -388,7 +388,7 @@ surface11 //smile
 	21pattern9,-1,10,move,0,2
 }
 
-surface12 //. mouth
+surface12 //o mouth
 {
 	element0,overlay,surface1012.png,0,0
 	
@@ -410,7 +410,7 @@ surface12 //. mouth
 	22pattern9,-1,10,move,0,2
 }
 
-surface13 //o mouth
+surface13 //pout
 {
 	element0,overlay,surface1013.png,0,0
 	
@@ -431,7 +431,7 @@ surface13 //o mouth
 	23pattern8,-1,10,move,0,1
 	23pattern9,-1,10,move,0,2
 }
-surface14 //pout
+surface14 //sad
 {
 	element0,overlay,surface1014.png,0,0
 	
@@ -451,6 +451,267 @@ surface14 //pout
 	24pattern7,-1,10,move,0,-1
 	24pattern8,-1,10,move,0,1
 	24pattern9,-1,10,move,0,2
+}
+surface15 //worried
+{
+	element0,overlay,surface1015.png,0,0
+	
+	15interval,random,4
+	15pattern0,-1,10,overlay,0,0
+	15pattern1,1000,50,overlayfast,0,0
+	15pattern3,-1,3,overlay,0,0
+	
+	25interval,always
+	25pattern0,-1,10,move,0,3
+	25pattern1,-1,10,move,0,2
+	25pattern2,-1,10,move,0,1
+	25pattern3,-1,20,move,0,-1
+	25pattern4,-1,10,move,0,-2
+	25pattern5,-1,10,move,0,-3
+	25pattern6,-1,10,move,0,-2
+	25pattern7,-1,10,move,0,-1
+	25pattern8,-1,10,move,0,1
+	25pattern9,-1,10,move,0,2
+}
+
+surface16 //surprised
+{
+	element0,overlay,surface1016.png,0,0
+	
+	26interval,always
+	26pattern0,-1,10,move,0,3
+	26pattern1,-1,10,move,0,2
+	26pattern2,-1,10,move,0,1
+	26pattern3,-1,20,move,0,-1
+	26pattern4,-1,10,move,0,-2
+	26pattern5,-1,10,move,0,-3
+	26pattern6,-1,10,move,0,-2
+	26pattern7,-1,10,move,0,-1
+	26pattern8,-1,10,move,0,1
+	26pattern9,-1,10,move,0,2
+}
+surface17 //flustered 
+{
+	element0,overlay,surface1017.png,0,0
+	
+	27interval,always
+	27pattern0,-1,10,move,0,3
+	27pattern1,-1,10,move,0,2
+	27pattern2,-1,10,move,0,1
+	27pattern3,-1,20,move,0,-1
+	27pattern4,-1,10,move,0,-2
+	27pattern5,-1,10,move,0,-3
+	27pattern6,-1,10,move,0,-2
+	27pattern7,-1,10,move,0,-1
+	27pattern8,-1,10,move,0,1
+	27pattern9,-1,10,move,0,2
+}
+surface18 //look down
+{
+	element0,overlay,surface1018.png,0,0
+	
+	28interval,always
+	28pattern0,-1,10,move,0,3
+	28pattern1,-1,10,move,0,2
+	28pattern2,-1,10,move,0,1
+	28pattern3,-1,20,move,0,-1
+	28pattern4,-1,10,move,0,-2
+	28pattern5,-1,10,move,0,-3
+	28pattern6,-1,10,move,0,-2
+	28pattern7,-1,10,move,0,-1
+	28pattern8,-1,10,move,0,1
+	28pattern9,-1,10,move,0,2
+}
+surface19 //confused
+{
+	element0,overlay,surface1019.png,0,0
+	
+	29interval,always
+	29pattern0,-1,10,move,0,3
+	29pattern1,-1,10,move,0,2
+	29pattern2,-1,10,move,0,1
+	29pattern3,-1,20,move,0,-1
+	29pattern4,-1,10,move,0,-2
+	29pattern5,-1,10,move,0,-3
+	29pattern6,-1,10,move,0,-2
+	29pattern7,-1,10,move,0,-1
+	29pattern8,-1,10,move,0,1
+	29pattern9,-1,10,move,0,2
+}
+surface20 //dumbfounded
+{
+	element0,overlay,surface1020.png,0,0
+	
+	30interval,always
+	30pattern0,-1,10,move,0,3
+	30pattern1,-1,10,move,0,2
+	30pattern2,-1,10,move,0,1
+	30pattern3,-1,20,move,0,-1
+	30pattern4,-1,10,move,0,-2
+	30pattern5,-1,10,move,0,-3
+	30pattern6,-1,10,move,0,-2
+	30pattern7,-1,10,move,0,-1
+	30pattern8,-1,10,move,0,1
+	30pattern9,-1,10,move,0,2
+}
+surface21 //>~<
+{
+	element0,overlay,surface1021.png,0,0
+	
+	41interval,always
+	41pattern0,-1,10,move,0,3
+	41pattern1,-1,10,move,0,2
+	41pattern2,-1,10,move,0,1
+	41pattern3,-1,20,move,0,-1
+	41pattern4,-1,10,move,0,-2
+	41pattern5,-1,10,move,0,-3
+	41pattern6,-1,10,move,0,-2
+	41pattern7,-1,10,move,0,-1
+	41pattern8,-1,10,move,0,1
+	41pattern9,-1,10,move,0,2
+}
+surface22 //owo
+{
+	element0,overlay,surface1022.png,0,0
+	
+	32interval,random,4
+	32pattern0,-1,10,overlay,0,0
+	32pattern1,1000,50,overlayfast,0,0
+	32pattern3,-1,3,overlay,0,0
+	
+	42interval,always
+	42pattern0,-1,10,move,0,3
+	42pattern1,-1,10,move,0,2
+	42pattern2,-1,10,move,0,1
+	42pattern3,-1,20,move,0,-1
+	42pattern4,-1,10,move,0,-2
+	42pattern5,-1,10,move,0,-3
+	42pattern6,-1,10,move,0,-2
+	42pattern7,-1,10,move,0,-1
+	42pattern8,-1,10,move,0,1
+	42pattern9,-1,10,move,0,2
+}
+surface23 //sweatdrop1
+{
+	element0,overlay,surface1023.png,0,0
+	
+	43interval,always
+	43pattern0,-1,10,move,0,3
+	43pattern1,-1,10,move,0,2
+	43pattern2,-1,10,move,0,1
+	43pattern3,-1,20,move,0,-1
+	43pattern4,-1,10,move,0,-2
+	43pattern5,-1,10,move,0,-3
+	43pattern6,-1,10,move,0,-2
+	43pattern7,-1,10,move,0,-1
+	43pattern8,-1,10,move,0,1
+	43pattern9,-1,10,move,0,2
+}
+surface24 //sweatdrop2
+{
+	34interval,random,4
+	34pattern0,-1,10,overlay,0,0
+	34pattern1,1000,50,overlayfast,0,0
+	34pattern3,-1,3,overlay,0,0
+	
+	element0,overlay,surface1024.png,0,0
+	
+	44interval,always
+	44pattern0,-1,10,move,0,3
+	44pattern1,-1,10,move,0,2
+	44pattern2,-1,10,move,0,1
+	44pattern3,-1,20,move,0,-1
+	44pattern4,-1,10,move,0,-2
+	44pattern5,-1,10,move,0,-3
+	44pattern6,-1,10,move,0,-2
+	44pattern7,-1,10,move,0,-1
+	44pattern8,-1,10,move,0,1
+	44pattern9,-1,10,move,0,2
+}
+surface25 //closed eyed smile
+{
+	element0,overlay,surface25.png,0,0
+	
+	45interval,always
+	45pattern0,-1,10,move,0,3
+	45pattern1,-1,10,move,0,2
+	45pattern2,-1,10,move,0,1
+	45pattern3,-1,20,move,0,-1
+	45pattern4,-1,10,move,0,-2
+	45pattern5,-1,10,move,0,-3
+	45pattern6,-1,10,move,0,-2
+	45pattern7,-1,10,move,0,-1
+	45pattern8,-1,10,move,0,1
+	45pattern9,-1,10,move,0,2
+}
+surface26 //smile
+{
+	36interval,random,4
+	36pattern0,-1,10,overlay,0,0
+	36pattern1,1000,50,overlayfast,0,0
+	36pattern3,-1,3,overlay,0,0
+	
+	element0,overlay,surface1026.png,0,0
+	
+	46interval,always
+	46pattern0,-1,10,move,0,3
+	46pattern1,-1,10,move,0,2
+	46pattern2,-1,10,move,0,1
+	46pattern3,-1,20,move,0,-1
+	46pattern4,-1,10,move,0,-2
+	46pattern5,-1,10,move,0,-3
+	46pattern6,-1,10,move,0,-2
+	46pattern7,-1,10,move,0,-1
+	46pattern8,-1,10,move,0,1
+	46pattern9,-1,10,move,0,2
+}
+surface27 //panicking 
+{
+	element0,overlay,surface1017.png,0,0
+	
+	47interval,always
+	47pattern0,-1,7,move,3,0
+	47pattern1,-1,7,move,-3,0
+	47pattern2,-1,7,move,2,0
+	47pattern3,-1,7,move,-2,0
+	47pattern4,-1,7,move,3,0
+	47pattern5,-1,7,move,-3,0
+	47pattern6,-1,7,move,1,0
+	47pattern7,-1,7,move,-1,0
+	47pattern8,-1,7,move,2,0
+	47pattern9,-1,7,move,-2,0
+}
+surface28 //innocent-looking
+{
+	element0,overlay,surface1025.png,0,0
+ 
+	38interval,runonce
+	38pattern0,-1,0,overlay,0,0
+	38pattern1,1920,50,overlay,0,0
+	38pattern2,1921,50,overlay,0,0
+	38pattern3,1922,50,overlay,0,0
+	38pattern4,1920,50,overlay,0,0
+	38pattern5,1921,50,overlay,0,0
+	38pattern6,1922,50,overlay,0,0
+	38pattern7,1920,50,overlay,0,0
+	38pattern8,1921,50,overlay,0,0
+	38pattern9,1922,50,overlay,0,0
+	38pattern10,1920,50,overlay,0,0
+	38pattern11,1921,50,overlay,0,0
+	38pattern12,1922,50,overlay,0,0
+	38pattern13,-1,50,overlay,0,0
+	
+	48interval,always
+	48pattern0,-1,10,move,0,3
+	48pattern1,-1,10,move,0,2
+	48pattern2,-1,10,move,0,1
+	48pattern3,-1,20,move,0,-1
+	48pattern4,-1,10,move,0,-2
+	48pattern5,-1,10,move,0,-3
+	48pattern6,-1,10,move,0,-2
+	48pattern7,-1,10,move,0,-1
+	48pattern8,-1,10,move,0,1
+	48pattern9,-1,10,move,0,2
 }
 
 surface90
