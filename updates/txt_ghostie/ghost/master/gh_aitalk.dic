@@ -89,6 +89,20 @@ RandomTalk : nonoverlap
 		{
 			"\0"
 			--
+			"\b[0]"
+			"\b[1]"
+			"\b[2]"
+			"\b[3]"
+			"\b[4]"
+			"\b[5]"
+			"\b[6]"
+			"\b[8]"
+			--
+			"\s[21]"
+			"\s[22]"
+			"\s[26]"
+			"\s[25]"
+			--
 			"  I'm super excited for Halloween... Are you?\w8\e"
 			"  I can't wait for Halloween! I wish it would come sooner.\w8\e"
 			"  Halloween is near! Do you have any plans, %(username)?\w8\e"
@@ -102,11 +116,61 @@ RandomTalk : nonoverlap
 	}
 	if timeslot == "earlymorning"
 	{
-
+		"\0"
+		--
+		"\b[0]"
+		"\b[1]"
+		"\b[2]"
+		"\b[3]"
+		"\b[4]"
+		"\b[5]"
+		"\b[6]"
+		"\b[8]"
+		--
+		//"I like to go to the beach around this time. You know, to look at the sunrise."
+		"\s[18]  I like to go to the beach around this time.\w8\w8\s[26]\w5 You know, \w8\s[28]to look at the sunrise.\w8\e"
+		//"I'm usually at the beach around this time. It's super peaceful."
+		"\s[11]  I'm usually at the beach around this time.\n\n[half]\w5\w8\s[25]It's super peaceful."
+		//"I usually go to the beach around this time./
+		//It's nice to go there and watch the sunrise, and then hang out there for a bit."
+		"\s[26]  I usually go to the beach around this time\w2.\w2.\w2.\w8\w3\n\n[half]/
+		\s[25]It's nice to go there and watch the sunrise, \w8and then hang out there for a bit.\w8\e"
+		//"I love the beach. It's super peaceful!/
+		//I never really got to go there when I was alive, so I'm glad I can do that now,/
+		//even though I can't build sandcastles or anything..."
+		"\s[22]  I love the beach. \w8\w3\s[21]It's super peaceful!\w8\w5\n\n[half]/
+		\s[18]I never really got to go there when I was alive, \w5\s[25]so I'm glad I can do that now, \w8/
+		\s[18]even though I can't build sandcastles or anything\w2.\w2.\w2.\w8\e"
+		//"I really like the beach. There are little crabs in the sand and the water looks really pretty!"
+		"\s[25]  I really like the beach.\w8\w8\w5\n\n[half]/
+		\s[28]There are little crabs in the sand and the water looks really pretty!\w8\e"
+		//"I love going to the beach. I'm glad I can go there almost everyday now..."
+		"\s[26]  I love going to the beach.\w8\w8\s[25] I'm glad I can go there almost everyday now\w2.\w2.\w2.\w8\e"
+		//"I used to skip breakfast a lot... But you shouldn't do that, okay, %(username)? -/
+		//Don't be like me. Make sure you eat!"
+		"\s[23]  I used to skip breakfast a lot\w2.\w2.\w2.\w8\w5\s[13] But you shouldn't do that,\w2 okay,/
+		\w2 %(username)?\w8\w8\n\n[half]\s[23]Don't be like me. \s[13]\w8\w8Make sure you eat!\w8\e"
+		//"I never woke up this early when I was alive. Kudos to you, %(username)!"
+		"\s[23]  I never woke up this early when I was alive.\w8\w8\w8\s[24]\n\n[half]So kudos to you, %(username)!\w8\e"
+		//"I never needed to wake up this early when I was alive... But now I don't need to sleep, so..."
+		"\s[23]  I never needed to wake up this early when I was alive\w2.\w2.\w2.\w2\n\n[half]/
+		\w8\s[11]But now I don't need to sleep, \w8so\w2.\w2.\w2.\w8\e"
+		//"I used to hate mornings... But now I quite enjoy them. Some stuff you just appreciate more after death, I suppose."
+		"\s[23]  I used to hate mornings\w2.\w2.\w2.\w8\w2 \s[22]But now I quite enjoy them. \w8\w8\w8/
+		\n\n[half]\s[18]Some stuff you just appreciate more after death, \w5I suppose.\w8\e"
+		//"Are you up early for some reason, %(username)? It's way too early..."
+		"\s[19]  Are you up early for some reason,\w8 %(username)?\w8\w8/
+		\n\n[half]\s[23]It's \w2\f[italic,true]way\f[italic,false] too early\w2.\w2.\w2.\w8\e"
+		//"Why are you up so early, %(username)..."
+		"\s[23]  Why are you up so early,\w5 %(username)\w2.\w2.\w2.\w8\e"
+		//"Why did you wake up so early today, %(username)?
+		//I hope you actually slept and woke up, instead of staying up all night..."
+		"\s[19]  Why did you wake up so early today,\w4 %(username)?/
+		\n\n[half]\s[15]I hope you actually slept and woke up,\w8\s[23] instead of staying up all night\w2.\w2.\w2.w8\e"
 	}
 	if timeslot == "morning"
 	{
-
+		"Everyone should be awake by now... It still kinda feels strange, how the city goes to rest, but I still roam around..."
 	}
 	if timeslot == "lunch"
 	{

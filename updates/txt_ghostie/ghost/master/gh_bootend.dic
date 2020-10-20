@@ -12,22 +12,24 @@ OnFirstBoot
 	mikireflag       = 0	   // Determines behavior at certain points.
  	aitalkinterval = 400       //Their default talk rate.
 	presuffix = "unknown"      //Their pronouns
- 	birthdayprint = "????"     //A temporary value for the user's birthday.
+ 	birthdayprint = "unknown"     //A temporary value for the user's birthday.
 	talktime = "5 minutes"     //How the value aitalkinterval will display in the config menu.
 	deleteshitai = "OFF"       //Sets whether or not the user can uninstall the ghost to "OFF".
 	nowshell = "default"       //This is for a special if check in aitalk.dic to see what shell the ghost is using. You should use the name of your default shell folder here.
 	LunchMentioned = "FALSE"   //If Lunch came up in conversation
 	DinnerMentioned = "FALSE"  //If Dinner came up in conversation
-	WaterCactie = "FALSE"
-	AdmireCactie = "FALSE"
-	CleanCactie = "FALSE"
-	CactieNameKnow = "FALSE"
-	ThornCactie = "FALSE"
+	WaterCactie = "FALSE"      //If User has watered Cactie that day.
+	AdmireCactie = "FALSE"     //If User has admired Cactie that day.
+	CleanCactie = "FALSE"      //If User has cleaned Cactie that day.
+	CactieNameKnow = "FALSE"   //If User knows the cactus' name.
+	ThornCactie = "FALSE"      //If User has been pricked by Cactie that day.
+	FirstNameInput = 0         //If it is the User's first time inputing name.
 	
 	
 	if reference0 == 0 
  	{
 		"\![enter,passivemode]\0\s[11]\b[4]  Oh! \w1I've never been here before...\x\c\s[19]\b[2]  \w8.\w3.\w3.\w8\w8\s[20] Where am I?\x\s[16]\b[5]  (He finally seems to notice you.)\x\s[17]\b[1]  O-\w3oh!\w6 Hi there!\w8\w8\w8 \n\n[half]You- \w5You're a human!\x\c\s[27]\b[3]  (He appears to be freaking out.)\x\c\s[16]\b[8]  \f[bold,true]\f[height,18]YOU'RE A HUMAN!!\f[bold,false]\f[height,16]\w8\w8\s[18]\w6\w2\n\n[half]Wait-\w2 sorry,\w5 I shouldn't shout\w2.\w2.\w2.\w8\w8\w5\c\s[16]\b[6]  But you're actually a human!\w8 \s[0]\f[height,14]\s[15]I haven't talked to a human in so long\w2.\w2.\w2.\w8\f[height,16]\w8\w8\c\s[17]\b[6]  B-\w5But hi! \w8\w4I'm a Ghostie, \w5\s[18]as you can see\w1.\w1.\w1.\n\n[half]\w8\w8\w8\s[22]What about you?\w8 What's your name?\x\![open,inputbox,OnNameTeach,-1]\![leave,passivemode]"
+		
 		
 		//\w5\_q\![*]\q[He/Him/His,choicefirsthehim]\n/
 		//\![*]\q[She/Her/Hers,choicefirstsheher]\n/
@@ -46,6 +48,7 @@ OnFirstBoot
 		}
  	}
 }
+
 
 //-----Select pronouns
 //--Him/he/his
@@ -151,7 +154,7 @@ OnBoot
 	
 	if dayslot == userbirthday //Checks if today is the User's birthday. 
 	{
-				"\0\s[0]It's %(bornmonthprint) %(borndayprint).\w8\1\s[10]Happy birthday, %(username).\e" 
+				"\0\s[0]It's %(bornmonthprint) %(borndayprint).\w8\0\s[10]Happy birthday, %(username).\e" 
 	}
 	elseif dayslot == "6month 6day"
 	{
@@ -251,18 +254,18 @@ normalboottalk
 		{
 			//noexp
 			//"It's lunchtime! Have you eaten yet, %(username)?"
-			"\s[0]\b[0]  It's lunchtime!\w8\w8\n\n[half]/
+			"\0\s[0]\b[0]  It's lunchtime!\w8\w8\n\n[half]/
 			Have you eaten yet,\w4 %(username)?\w8\w8\n\n[half]/
 			\![*]\q[Yes,choicelunchyes]\n/
 			\![*]\q[No,choicelunchno]"
 			//"Good afternoon!"
-			"\s[0]\b[0]  Good afternoon!\w8\e"
+			"\0\s[0]\b[0]  Good afternoon!\w8\e"
 			//"Good afternoon and happy lunching!"
-			"\s[0]\b[0]  Good afternoon and happy lunching!\w8\e"
+			"\0\s[0]\b[0]  Good afternoon and happy lunching!\w8\e"
 			//"Hello and happy lunching!"
-			"\s[0]\b[0]  Hello and happy lunching!\w8\e"
+			"\0\s[0]\b[0]  Hello and happy lunching!\w8\e"
 			//"It's lunchtime, %(username)! Remember to eat!"
-			"\s[0]\b[0]  It's lunchtime,\w3 %(username)! \w8\w8\n\n[half]/
+			"\0\s[0]\b[0]  It's lunchtime,\w3 %(username)! \w8\w8\n\n[half]/
 			Remember to eat!\w8\e"
 			
 		}
@@ -271,14 +274,14 @@ normalboottalk
 			//noexp
 			//nobal
 			//"It's the afternoon~"
-			"\s[0]\b[0]  It's the afternoon~"
+			"\0\s[0]\b[0]  It's the afternoon~"
 			//"Good afternoon!"
-			"\s[0]\b[0]  Good afternoon!"
+			"\0\s[0]\b[0]  Good afternoon!"
 			//"It's afternoon... Have you eaten lunch, User?"
-			"\s[0]\b[0]  It's afternoon!/
+			"\0\s[0]\b[0]  It's afternoon!/
 			Have you eaten lunch, User?"
 			//"Good afternoon, User! How was lunch?"
-			"\s[0]\b[0]  Good afternoon,\w3 %(username)!\w8\w2\n\n[half]/
+			"\0\s[0]\b[0]  Good afternoon,\w3 %(username)!\w8\w2\n\n[half]/
 			How was lunch?\w8\w5\n\n[half]/
 			\![*]\q[It was good,choiceafternoonlunchgood]\n/
 			\![*]\q[It was bad,choiceafternoonlunchbad]\n/
@@ -286,6 +289,8 @@ normalboottalk
 		}
 		elseif timeslot == "evening"
 		{
+			"\0"
+			--
 			"\b[0]"
 			"\b[1]"
 			"\b[2]"
@@ -332,10 +337,10 @@ Select.choicegoodsleep
 {
 	//noexp
 	//"That's good."
-	"\s[0]\b[4] That's good.\e"
-	"\s[0]\b[5] That's good.\e"
-	"\s[0]\b[6] That's good.\e"
-	"\s[0]\b[8] That's good.\e"
+	"\0\s[0]\b[4] That's good.\e"
+	"0\s[0]\b[5] That's good.\e"
+	"\0\s[0]\b[6] That's good.\e"
+	"\0\s[0]\b[8] That's good.\e"
 }
 //--Morning--User had bad sleep
 Select.choicebadsleep

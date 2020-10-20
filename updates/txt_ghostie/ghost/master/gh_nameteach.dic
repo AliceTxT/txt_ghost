@@ -143,7 +143,7 @@ Select.titlessi
 	username = tempname + "-ssi"
 	NameDone
 }
-//--sunbae
+//--sunbaeA
 Select.titlesunbae
 {
 	username = tempname + "-sunbae"
@@ -156,6 +156,15 @@ Select.titlesunbae
 
 NameDone
 {
-	//noexp
-	"\0\s[21] Ok!\w8\w2 \s[26]I will call you %(username).\e"
+	if FirstNameInput == 0
+	{
+		"\0\s[21] Ok!\w8\w2 \s[26]I will call you %(username).\x/
+		\c\0\s[25]\b[6]  I hope we'll be good friends, %(username)!\w8\e"
+		--
+		FirstNameInput = 1
+	}
+	else
+	{
+		"\0\s[21] Ok!\w8\w2 \s[26]I shall call you %(username)."
+	}
 }

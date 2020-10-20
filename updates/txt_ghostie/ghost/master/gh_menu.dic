@@ -53,10 +53,8 @@ MenuRun
 	}
 	--
  	"\![*]\q[Say something,altalk]\n\n[half]"
-	"\![*]\q[Say something 2,altalk]\n\n[half]"
 	--
-	"\![*]\q[Update,keroupdatecheck]\n/
- 	\![*]\q[Bug report,bugreport]\n/
+ 	"\![*]\q[Bug report,bugreport]\n/
 	\![*]\q[Test variable,testvariable]\n"
 	
 	//This option will force the ghost to say something from aitalk if the user clicks it. Just replace "Say something" and "Say something 2" with whatever captions you think would be appropriate for such an option. IF you don't want two options for captions, delete one of the lines.
@@ -547,39 +545,65 @@ Select.dosomething
 //When the user clicks Open Calender. This will open the calender function of SSP, an in-built feature that you don't have to worry about in the least.
 Select.CALENDAR
 {
-	"\0\s[0]Opening the calender.\![open,calendar]\e"
-	
-	//You can replace the dialogue here up to the \!.
-	//Advanced users, can you break it down yet? It's basically just using \! to open calender.exe or dll or whatever SSP uses to make it happen.
+	"\0\s[12]Checking the calendar\w2.\w2.\w2.\![open,calendar]\e"
+	"\0\s[21]Okie~! \w5Let's check the calendar!\![open,calendar]\e"
 }
 
 //When the user chooses SSP preferences. This will open the same window that shows up if you right click your ghost and go to Utilities - Preferences.
 Select.sspconfig
 {
-	"\0\s[0]Opening the SSP config menu.\![open,configurationdialog]\e"
-	
-	//Again, you can replace up to the \! tag.
+	"\0\s[0]Sure!\w5 I'll open that for you\w2.\w2.\w2.\![open,configurationdialog]\e"
 }
 
 //If the user chooses to empty the recycle bin.
 Select.ChoiceGarbagecan
 {
-	_gomicheck = FUNCTIONEX("gomi.dll", "-n")	//Don't touch this line. for those curious, it's referencing a SAORI, which are optional user-made plug-in dlls you can download to enable different functions on your ghost. gomi.dll is one included with this template. All SAORI are in Japanese (maybe Korean or Chinese as well idk) and many have disappeared by now, so don't concern yourself very much with SAORI. It's just some ghost trivia, basically.
+	_gomicheck = FUNCTIONEX("gomi.dll", "-n")
 	
 	if _gomicheck == 0 //If the recycle bin is empty.
 	{
-		"\0\s[0]Triangle, go check the recycle bin.\w8\1\s[19]Fine.\w8\w8\s[-1]\w8\w8\w8\w8\w8\1\s[10]\cIt was empty.\e"
-		
-		//This isn't the usual flat template dialogue, mostly because I wanted to show that this is a good place to use s[-1], which I covered in the walkthrough file. You can have your ghost disappear momentarily like they're going to check your recycle bin, then come back. \c clears the ghost's balloon of text. Replace dialogue as you desire.
+		"\0"
+		--
+		"\b[0]"
+		"\b[1]"
+		"\b[2]"
+		"\b[3]"
+		"\b[4]"
+		"\b[5]"
+		"\b[6]"
+		"\b[8]"
+		--
+		"\s[26]  Okay, \w3I'll go check it.\s[-1]\w8\w8\w8\w8\w8\w8\s[11]\c"
+		--
+		"\b[0]"
+		"\b[1]"
+		"\b[2]"
+		"\b[3]"
+		"\b[4]"
+		"\b[5]"
+		"\b[6]"
+		"\b[8]"
+		--
+		"  It's empty.\w8\e"
 	}
 	elseif _gomicheck >= 1 //If the recycle bin is full.
 	{
-		"\0\s[0]Emptying the recycle bin.\w8\1\s[19]I'm going.\w8\w8\s[-1]\w8\w8\w8\w8\w8\![raise,OnGarbagecanEmpty]\w9\w9\w9\1\s[10]\cDone.\e"
-		
-		"\0\s[0]This is the second recycle bin emptying dialogue.\w8\1\s[19]I'm going.\w8\w8\s[-1]\w8\w8\w8\w8\w8\![raise,OnGarbagecanEmpty]\w9\w9\w9\1\s[10]\cDone.\e"
-		
-		//Somewhat similar to the above, but notice the \![raise],OnGarbagecanEmpty] tag in there. That's what actually empties the recycle bin, so make sure you don't delete that tag. Otherwise, replace the dialogue as you want.
-		//As you can see, you can have multiple pieces of dialogue in here, just like you can for many other functions scattered through the .dic files. If you only want the one, just delete the others, or if you want to add more, just copy and paste and write new dialogue as it comes to you. This applies to when the recycle bin is empty as well.
+		"\0"
+		--
+		"\b[0]"
+		"\b[1]"
+		"\b[2]"
+		"\b[3]"
+		"\b[4]"
+		"\b[5]"
+		"\b[6]"
+		"\b[8]"
+		--
+		"\s[26]  Okay, \w3I'll go check it.\s[-1]\w8\w8\w8\w8\w8\w8\s[11]\c"
+		--
+		"\![raise,OnGarbagecanEmpty]"
+		--
+		"\s[25]  I've emptied it."
 	}
 }
 
@@ -617,7 +641,7 @@ Select.MailCheck
 //This is when the user ends their headline session. Headlines are detailed more in etc.dic. Replace dialogue with what strikes you.
 Select.HEADLINECANCEL
  	{
- 		"\0\s[0]Finished with headlines.\e"
+ 		"\0\s[11]Finished with headlines.\e"
 	}
 
 	
@@ -626,7 +650,6 @@ Select.HEADLINECANCEL
 
 OnChoiceTimeout
  {
-	"\0\s[0]The menu has timed out.\e"
  }
 
  
@@ -658,7 +681,8 @@ OpenKeroMenu
 	\![*]\q[Water,cactiewater]\n/
  	\![*]\q[Admire,cactieadmire]\n/
 	\![*]\q[Check, cactiecheck]\n/
-	\![*]\q[Talk,cactietalk]\n\n/
+	\![*]\q[Talk,cactietalk]\n\n[half]/
+	\![*]\q[Update,keroupdatecheck]\n\n[half]/
 	\![*]\q[Nothing,keroCANCEL]\e"
 }
 
@@ -810,7 +834,9 @@ Select.keroCANCEL
 //This is when they select bug report. This is mostly meant to briefly give the user information about you, the creator, and how to report a problem to you. This can be handy if the person forgot where they got their ghost or how to contact you. Add whatever info you like here.
 Select.bugreport
 {
-"\1\s[10]This is the bug report dialogue. \w5Report bugs to youremailaddress@emailprovider.com. \w5We were downloaded from \_a[http://www.whereveryoupostedthem.com/]some place\_a.\e"
+"\0\s[23]  Bug report!\w8\w8/
+\s[11]I was created by \_a[https://www.twitch.tv/alicetxt.]AliceTxT\_a./
+\w8\w8\w5You can find her discord server with this link and contact her through that.\w8\e"
 }
 
 //When clicked, this will automatically tell the ghost to check for updates. More detail on updates in etc.dic. You can leave this alone.
@@ -827,5 +853,8 @@ Select.keroupdatecheck
 
 Select.testvariable
 {
-	"\1\s[10]Testing!\e"
+	FirstNameInput = 0
+	--
+	"\![enter,passivemode]\0\s[11]\b[4]  Oh! \w1I've never been here before...\x\c\s[19]\b[2]  \w8.\w3.\w3.\w8\w8\s[20] Where am I?\x\s[16]\b[5]  (He finally seems to notice you.)\x\s[17]\b[1]  O-\w3oh!\w6 Hi there!\w8\w8\w8 \n\n[half]You- \w5You're a human!\x\c\s[27]\b[3]  (He appears to be freaking out.)\x\c\s[16]\b[8]  \f[bold,true]\f[height,18]YOU'RE A HUMAN!!\f[bold,false]\f[height,16]\w8\w8\s[18]\w6\w2\n\n[half]Wait-\w2 sorry,\w5 I shouldn't shout\w2.\w2.\w2.\w8\w8\w5\c\s[16]\b[6]  But you're actually a human!\w8 \s[0]\f[height,14]\s[15]I haven't talked to a human in so long\w2.\w2.\w2.\w8\f[height,16]\w8\w8\c\s[17]\b[6]  B-\w5But hi! \w8\w4I'm a Ghostie, \w5\s[18]as you can see\w1.\w1.\w1.\n\n[half]\w8\w8\w8\s[22]What about you?\w8 What's your name?\x\![open,inputbox,OnNameTeach,-1]\![leave,passivemode]"
+
 }

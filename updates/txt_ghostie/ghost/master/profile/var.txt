@@ -6,4 +6,4 @@ homeurl,https://AliceTxT.github.io/txt_ghost/updates/txt_ghostie/
 update_result,OK(0)
 firstboot,641437336
 commitmemorysize,475967
-lastboot,656011698
+lastboot,656527101

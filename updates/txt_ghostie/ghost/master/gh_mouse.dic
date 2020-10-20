@@ -51,7 +51,7 @@ MouseMoveSakura
  			stroke = 0 //resetting the stroke count
 			if reference4 == "Stomach" 
  			{
-				
+			
  			}
  			else
 			{
